@@ -146,4 +146,224 @@
             background-color: #eee;
             display: flex;
             align-items: center;
-            justify-content
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            height: 40px; /* Jaga agar deskripsi rata */
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #e68519;
+        }
+
+        /* --- CONTACT/ORDER SECTION --- */
+        .order {
+            background-color: var(--light-color);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .order-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .order-method {
+            flex: 1;
+            max-width: 300px;
+            padding: 30px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .order-method:hover {
+            border-color: var(--primary-color);
+        }
+
+        .order-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark-color);
+            color: rgba(255,255,255,0.7);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .nav-links { display: none; } /* Sembunyikan menu di mobile untuk kesederhanaan */
+            .logo { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Pitersnacks</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#order">Cara Order</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Krispy. Gurih. Nagih!</h1>
+            <p>Cobain varian snack home-made terbaik dari Pitersnacks. Dijamin bikin lidah goyang.</p>
+            <a href="#products" class="btn">Lihat Menu</a>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Produk Terlaris Kami</h2>
+            
+            <div class="product-grid">
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        [Foto Basreng Pedas]
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Basreng Pedas Daun Jeruk</h3>
+                        <p class="product-desc">Bakso goreng renyah dengan bumbu pedas nampol dan aroma daun jeruk segar.</p>
+                        <p class="product-price">Rp 15.000 / pcs</p>
+                        <a href="#order" class="buy-btn">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        [Foto Keripik Kaca]
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Keripik Kaca Ekstra Pedas</h3>
+                        <p class="product-desc">Tipis, bening, krispy parah! Cocok buat tantangan lidah kamu.</p>
+                        <p class="product-price">Rp 12.500 / pcs</p>
+                        <a href="#order" class="buy-btn">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        [Foto Makaroni Sosis]
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Makaroni Sosis BBQ</h3>
+                        <p class="product-desc">Makaroni goreng bumbu BBQ gurih dengan potongan sosis kering.</p>
+                        <p class="product-price">Rp 10.000 / pcs</p>
+                        <a href="#order" class="buy-btn">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        [Foto Sus Kering]
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sus Kering Cokelat</h3>
+                        <p class="product-desc">Kue sus mini renyah dengan isian cokelat lumer di dalam.</p>
+                        <p class="product-price">Rp 20.000 / pcs</p>
+                        <a href="#order" class="buy-btn">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="order" class="order">
+        <div class="container">
+            <h2 class="section-title">Siap Ngemil? Order Disini</h2>
+            <p>Pitersnacks tersedia di berbagai platform kesayangan kamu.</p>
+            
+            <div class="order-options">
+                <div class="order-method">
+                    <div class="order-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>Pesan langsung chat mimin. Fast respon!</p>
+                    <br>
+                    <a href="https://wa.me/628123456789" class="btn" style="background-color: #25D366; color: white;">Chat WA</a>
+                </div>
+
+                <div class="order-method">
+                    <div class="order-icon">🛍️</div>
+                    <h3>Shopee</h3>
+                    <p>Belanja aman dan dapatkan promo gratis ongkir.</p>
+                    <br>
+                    <a href="#" class="btn" style="background-color: #EE4D2D; color: white;">Buka Shopee</a>
+                </div>
+
+                <div class="order-method">
+                    <div class="order-icon">📸</div>
+                    <h3>Instagram</h3>
+                    <p>Follow kami untuk update varian baru dan promo.</p>
+                    <br>
+                    <a href="#" class="btn" style="background-color: #C13584; color: white;">@pitersnacks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Pitersnacks. All rights reserved.</p>
+            <p>Dibuat dengan ❤️ untuk teman Piter.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
