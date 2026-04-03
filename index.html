@@ -1,203 +1,52 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PITERSNACKS - Shopping Cart Mode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>PITERSNACKS PREMIUM</title>
     <style>
-        :root {
-            --primary-color: #f7941d;
-            --dark-color: #2c2c2c;
-            --price-color: #e74c3c;
-            --white: #ffffff;
+        body { font-family: sans-serif; text-align: center; background: #f4f4f4; margin: 0; padding: 20px; }
+        h1 { color: #f7941d; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* INI BIAR BERJEJER 3 KIRI-KANAN */
+            gap: 15px; 
+            max-width: 900px; 
+            margin: 20px auto; 
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #f9f9f9; color: var(--dark-color); }
-        .container { width: 90%; margin: auto; max-width: 1200px; }
-
-        /* HEADER & CART ICON */
-        header {
-            background: var(--white);
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .card { background: white; padding: 10px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card img { width: 100%; border-radius: 8px; height: 150px; object-fit: cover; }
+        .price { color: red; font-weight: bold; display: block; margin: 5px 0; }
+        .btn { 
+            display: block; 
+            background: #27ae60; 
+            color: white; 
+            padding: 15px; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            margin-top: 20px;
         }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: var(--primary-color); text-transform: uppercase; }
-        
-        .cart-icon-wrapper { position: relative; cursor: pointer; font-size: 24px; }
-        .cart-count { 
-            position: absolute; top: -10px; right: -10px; 
-            background: var(--price-color); color: white; 
-            font-size: 12px; padding: 2px 6px; border-radius: 50%; 
-        }
-
-        /* HERO */
-        .hero { padding: 140px 0 60px 0; display: flex; align-items: center; flex-wrap: wrap; background: #fff; }
-        .hero-text { flex: 1; min-width: 300px; padding-right: 30px; }
-        .hero-image { flex: 1; min-width: 300px; text-align: center; }
-        .hero-image img { width: 100%; max-width: 400px; border-radius: 20px; }
-
-        /* PRODUCT GRID */
-        .products { padding: 60px 0; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; padding-bottom: 15px;}
-        .product-img { height: 250px; background-size: cover; background-position: center; }
-        .product-info { padding: 15px; text-align: center; }
-        .product-name { font-weight: 600; margin-bottom: 10px; }
-        
-        .price-tag { color: var(--price-color); font-weight: 700; font-size: 20px; margin-bottom: 15px; display: block; }
-        .add-to-cart { 
-            background: var(--primary-color); color: white; border: none; 
-            padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 600;
-        }
-
-        /* SIDEBAR CART */
-        .cart-sidebar {
-            position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
-            background: white; z-index: 2000; transition: 0.4s; padding: 20px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            display: flex; flex-direction: column;
-        }
-        .cart-sidebar.active { right: 0; }
-        .close-cart { font-size: 30px; cursor: pointer; margin-bottom: 20px; }
-        .cart-items { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .cart-footer { padding-top: 20px; border-top: 2px solid #eee; }
-        .total-price { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
-        .checkout-btn { 
-            width: 100%; background: #27ae60; color: white; border: none; 
-            padding: 15px; border-radius: 10px; font-weight: 700; cursor: pointer;
-        }
-
-        /* PEANUT RAIN */
-        .peanut-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden;}
-        .falling-nut { position: absolute; width: 20px; height: 20px; animation: fall linear infinite; opacity: 0.5; }
-        @keyframes fall {
-            0% { transform: translateY(-50px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
+        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } } /* Di HP jadi 2 kolom */
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Pitersnacks</div>
-                <div class="cart-icon-wrapper" onclick="toggleCart()">
-                    🛒 <span class="cart-count" id="cartCount">0</span>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <h1>PITERSNACKS CAMBODIA</h1>
+    <p>Premium Snacks - Flat Price $2.5 (10,000 Riel)</p>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-text">
-                <h1>Pitersnacks <br><span>Cambodia</span></h1>
-                <p>Pilih snack favoritmu dan checkout langsung ke admin!</p>
-            </div>
-            <div class="hero-image">
-                <img src="https://i.postimg.cc/8cGHkfpz/ef1aa9fc-c7cd-455e-851e-bd0764a3dadc.jpg" alt="BA">
-            </div>
-        </div>
-    </section>
-
-    <section class="products">
-        <div class="container">
-            <div class="product-grid" id="productGrid"></div>
-        </div>
-    </section>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <span class="close-cart" onclick="toggleCart()">&times;</span>
-        <h2>Keranjang Belanja</h2>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="total-price">Total: <span id="totalUSD">$0</span> <br> <small id="totalRiel">0 Riel</small></div>
-            <button class="checkout-btn" onclick="checkout()">Checkout ke Spreadsheet/Form</button>
-        </div>
+    <div class="grid">
+        <div class="card"><img src="snack1.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack2.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack3.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack4.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack5.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack6.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack7.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack8.jpg"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack9.jpg"><span class="price">$2.5</span></div>
     </div>
 
-    <script>
-        const products = [
-            { id: 1, name: "Kacang Tojin", price: 2.5, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
-            { id: 2, name: "Ketawa", price: 2.5, img: "https://i.postimg.cc/ncFLBVMD/b95988fe-979d-48c6-891c-900e8f3e42f1.jpg" },
-            { id: 3, name: "Kacang Ting Ting", price: 2.5, img: "https://i.postimg.cc/hP2trF7k/ab4902a9-b072-4159-8ebb-3fbf45c8fc0b.jpg" },
-            { id: 4, name: "Mie Lidi", price: 2.5, img: "https://i.postimg.cc/K84vp9Pc/5bb5bc5e-cf70-47c1-86c5-dbd05e0cc616.jpg" },
-            { id: 5, name: "Makaroni", price: 2.5, img: "https://i.postimg.cc/9f7XCrgJ/9c04e078-ee93-4550-8310-851e9a34d691.jpg" },
-            { id: 6, name: "Basreng", price: 2.5, img: "https://i.postimg.cc/gjYGV4z5/601de701-a9b5-4bbf-8aa6-87b171349a64.jpg" },
-            { id: 7, name: "Lumpia", price: 2.5, img: "https://i.postimg.cc/ZYcbbkj9/38611567-5f9f-4899-9d33-cffa77b5e469.jpg" },
-            { id: 8, name: "Kacang Arab", price: 2.5, img: "https://i.postimg.cc/sDgV1n09/16ad7cba-62a3-48d4-a52c-25fe2f379b5e.jpg" },
-            { id: 9, name: "Kacang Madu", price: 2.5, img: "https://i.postimg.cc/sDH3Wpk1/129f1f36-b98b-4f99-bdde-93c543eb32e8.jpg" }
-        ];
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpGZ_sQQGpM5BlTaBT4eUBtDmTTVw4kMBCRnUGp3PjlM_vdw/viewform" class="btn">KLIK DI SINI UNTUK ORDER</a>
 
-        let cart = [];
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <div class="product-img" style="background-image: url('${p.img}')"></div>
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <span class="price-tag">$${p.price}</span>
-                        <button class="add-to-cart" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function addToCart(id) {
-            const item = products.find(p => p.id === id);
-            cart.push(item);
-            updateCart();
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const itemsList = document.getElementById('cartItems');
-            itemsList.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <span>${item.name}</span>
-                    <span>$${item.price} <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer;">&times;</button></span>
-                </div>
-            `).join('');
-
-            const total = cart.length * 2.5;
-            document.getElementById('totalUSD').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('totalRiel').innerText = `${(total * 4000).toLocaleString()} Riel`;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('active');
-        }
-
-        function checkout() {
-            if(cart.length === 0) return alert("Keranjang kosong!");
-            
-            const detailPesanan = cart.map(i => i.name).join(", ");
-            const totalBayar = document.getElementById('totalUSD').innerText;
-            
-            // GANTI LINK DI BAWAH INI DENGAN LINK GOOGLE FORM KAMU
-            const googleFormLink = "https://docs.google.com/forms/u/0/d/e/LINK_FORM_KAMU/viewform?entry.PESANAN=" + encodeURIComponent(detailPesanan) + "&entry.TOTAL=" + totalBayar;
-            
-            window.open(googleFormLink, '_blank');
-        }
-
-        renderProducts();
-    </script>
 </body>
 </html>
