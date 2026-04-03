@@ -1,18 +1,108 @@
-<div class="grid">
-    <div class="card">
-        <a href="LINK_PREFILLED_KACANG_TOJIN_DISINI">
-            <img src="snack1.jpg">
-            <span>Kacang Tojin - $2.5</span>
-            <p style="color: blue;">Klik untuk Pilih</p>
-        </a>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PITERSNACKS - Premium Snacks</title>
+    <style>
+        :root { --primary: #f7941d; --dark: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #fefefe; color: var(--dark); text-align: center; }
+        
+        /* Header & Logo */
+        header { padding: 40px 20px; background: white; }
+        .logo-box { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 20px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: var(--primary); }
+        h1 { margin: 0; letter-spacing: 2px; font-size: 1.8em; }
+
+        /* Countdown Area */
+        #countdown-container { background: var(--primary); color: white; padding: 25px 10px; margin: 20px 0; }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+        .time-box { display: flex; flex-direction: column; min-width: 50px; }
+        .time-box span { font-size: 1.8em; font-weight: bold; }
+        .time-box small { font-size: 0.6em; text-transform: uppercase; }
+
+        /* Snack Grid */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 900px; margin: 0 auto; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative; }
+        .card img { width: 100%; height: 150px; object-fit: cover; cursor: pointer; }
+        .price { position: absolute; top: 10px; right: 10px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8em; }
+
+        /* Order Button */
+        .order-btn { display: inline-block; background: #27ae60; color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; margin: 30px 0; box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3); font-size: 1.1em; }
+        
+        /* Footer */
+        footer { padding: 40px 20px; font-size: 0.8em; opacity: 0.6; }
+
+        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-box">P</div>
+        <h1>PITER SNACKS</h1>
+        <p>Premium Quality • $2.5 Only</p>
+    </header>
+
+    <div id="countdown-container">
+        <p style="margin:0; font-size: 0.9em;">OFFICIAL LAUNCHING IN:</p>
+        <div class="timer-grid">
+            <div class="time-box"><span id="days">00</span><small>Days</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
+            <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
+        </div>
     </div>
 
-    <div class="card">
-        <a href="LINK_PREFILLED_BASRENG_DISINI">
-            <img src="snack2.jpg">
-            <span>Basreng - $2.5</span>
-            <p style="color: blue;">Klik untuk Pilih</p>
-        </a>
+    <div class="grid">
+        <div class="card"><img src="snack1.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack2.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack3.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack4.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack5.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack6.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack7.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack8.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
+        <div class="card"><img src="snack9.jpg" onclick="goToPay()"><span class="price">$2.5</span></div>
     </div>
-    
+
+    <div id="qris-area" style="display:none; padding: 40px 20px; background: #fffbe6; margin-top: 20px;">
+        <h3>SILAKAN SCAN & BAYAR</h3>
+        <img src="qris.jpg" style="width: 250px; border: 10px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <p>Setelah bayar, klik tombol di bawah untuk konfirmasi!</p>
+        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" class="order-btn">SUDAH BAYAR? ISI FORM DISINI</a>
     </div>
+
+    <footer>
+        &copy; 2026 PITER SNACKS CAMBODIA
+    </footer>
+
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 1. COUNTDOWN LOGIC
+        const launchDate = new Date("April 9, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = launchDate - now;
+            document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+            document.getElementById('mins').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+            document.getElementById('secs').innerText = Math.floor((diff % (1000*60)) / 1000);
+        }, 1000);
+
+        // 2. AUTOPLAY & SHOW QRIS LOGIC
+        function goToPay() {
+            // Putar musik (karena user sudah berinteraksi/klik gambar)
+            const music = document.getElementById('bgMusic');
+            music.play();
+            
+            // Munculkan QRIS area
+            const qris = document.getElementById('qris-area');
+            qris.style.display = 'block';
+            qris.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
