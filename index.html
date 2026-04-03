@@ -3,53 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PITERSNACKS - Premium Snacks</title>
+    <title>PITERSNACKS - Premium Snacks Cambodia</title>
     <style>
-        :root { --primary: #f7941d; --dark: #333; --bg: #fefefe; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: var(--bg); color: var(--dark); text-align: center; }
+        :root { --primary: #f7941d; --dark: #1a1a1a; --bg: #ffffff; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background: var(--bg); color: var(--dark); text-align: center; }
         
         /* Header & Logo */
-        header { padding: 40px 20px; background: white; border-bottom: 1px solid #eee; }
-        .logo-box { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 20px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: var(--primary); box-shadow: 0 4px 10px rgba(247, 148, 29, 0.2); }
-        h1 { margin: 0; letter-spacing: 2px; font-size: 1.8em; font-weight: 800; color: #1a1a1a; }
-        header p { margin: 5px 0 0; opacity: 0.7; font-size: 0.9em; }
+        header { padding: 40px 20px; background: white; }
+        .logo-box { width: 70px; height: 70px; border: 3px solid var(--primary); border-radius: 18px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 35px; font-weight: 900; color: var(--primary); box-shadow: 0 4px 10px rgba(247, 148, 29, 0.2); }
+        h1 { margin: 0; letter-spacing: 3px; font-size: 1.6em; font-weight: 800; text-transform: uppercase; }
+        header p { margin: 5px 0 0; opacity: 0.6; font-size: 0.85em; font-weight: bold; }
 
         /* Countdown Area */
-        #countdown-container { background: var(--primary); color: white; padding: 25px 10px; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
-        #countdown-container p { margin:0; font-size: 0.9em; font-weight: bold; letter-spacing: 1px; }
-        .timer-grid { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
-        .time-box { display: flex; flex-direction: column; min-width: 50px; background: rgba(255,255,255,0.1); padding: 5px; border-radius: 8px; }
-        .time-box span { font-size: 1.8em; font-weight: bold; }
-        .time-box small { font-size: 0.6em; text-transform: uppercase; opacity: 0.8; }
+        #countdown-container { background: var(--primary); color: white; padding: 20px 10px; margin: 0; }
+        #countdown-container p { margin:0; font-size: 0.8em; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+        .timer-grid { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+        .time-box { display: flex; flex-direction: column; min-width: 55px; background: rgba(0,0,0,0.1); padding: 8px; border-radius: 8px; }
+        .time-box span { font-size: 1.6em; font-weight: bold; }
+        .time-box small { font-size: 0.6em; text-transform: uppercase; opacity: 0.9; }
 
         /* Snack Grid */
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; max-width: 900px; margin: 0 auto; background: #fff; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.04); border: 1px solid #eee; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
-        .card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; display: block; }
-        .price { position: absolute; top: 10px; right: 10px; background: var(--primary); color: white; padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 0.85em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card-info { padding: 10px; text-align: left; }
-        .card-info h3 { margin: 0; font-size: 1em; color: var(--dark); }
-        .card-info p { margin: 2px 0 0; font-size: 0.8em; opacity: 0.6; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; max-width: 800px; margin: 0 auto; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; position: relative; cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .price { position: absolute; top: 8px; right: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size: 0.75em; }
+        .card-info { padding: 10px; background: white; }
+        .card-info h3 { margin: 0; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; color: #333; }
 
         /* Section QRIS (Hidden) */
-        #qris-area { display:none; padding: 50px 20px; background: #fffbe6; border-top: 2px solid #fff3cd; }
-        #qris-area h3 { color: #856404; margin-top: 0; font-size: 1.5em; }
-        #qris-area img { width: 250px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 15px; margin: 20px 0; }
-        #qris-area p { color: #856404; opacity: 0.8; max-width: 400px; margin: 0 auto 30px; }
-
-        /* Order Button */
-        .order-btn { display: inline-block; background: #27ae60; color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3); font-size: 1.1em; transition: background 0.2s; }
-        .order-btn:hover { background: #219150; }
+        #qris-area { display:none; padding: 60px 20px; background: #fffdf5; border-top: 1px solid #f9eebc; margin-top: 20px; }
+        #qris-area h2 { color: #856404; font-size: 1.4em; margin-bottom: 20px; }
+        #qris-area img { width: 280px; border: 8px solid white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 25px; }
         
-        /* Footer */
-        footer { padding: 40px 20px; font-size: 0.8em; opacity: 0.5; background: #f9f9f9; border-top: 1px solid #eee; }
+        /* Order Button */
+        .order-btn { display: inline-block; background: #27ae60; color: white; padding: 18px 45px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4); border: none; cursor: pointer; }
+
+        footer { padding: 50px 20px; font-size: 0.75em; opacity: 0.4; letter-spacing: 1px; }
 
         @media (max-width: 600px) { 
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; } 
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } 
             .card img { height: 150px; }
-            .logo-box { width: 60px; height: 60px; font-size: 30px; }
-            h1 { font-size: 1.5em; }
+            h1 { font-size: 1.3em; }
         }
     </style>
 </head>
@@ -58,76 +53,76 @@
     <header>
         <div class="logo-box">P</div>
         <h1>PITER SNACKS</h1>
-        <p>Premium Quality • $2.5 Only (10,000 Riel)</p>
+        <p>PREMIUM SNACKS • CAMBODIA</p>
     </header>
 
     <div id="countdown-container">
-        <p>OFFICIAL LAUNCHING IN:</p>
+        <p>Launching In:</p>
         <div class="timer-grid">
             <div class="time-box"><span id="days">00</span><small>Days</small></div>
-            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
-            <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
-            <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+            <div class="time-box"><span id="mins">00</span><small>Min</small></div>
+            <div class="time-box"><span id="secs">00</span><small>Sec</small></div>
         </div>
     </div>
 
     <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Kacang Mede Pedas</h3><p>Gurih & Nendang</p></div>
+            <div class="card-info"><h3>KACANG TOJIN</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/ncFLBVMD/b95988fe-979d-48c6-891c-900e8f3e42f1.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Keripik Singkong</h3><p>Renyah Poll</p></div>
+            <div class="card-info"><h3>KETAWA</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/hP2trF7k/ab4902a9-b072-4159-8ebb-3fbf45c8fc0b.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Basreng Jeruk</h3><p>Pedas Segar</p></div>
+            <div class="card-info"><h3>KACANG TING TING</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/K84vp9Pc/5bb5bc5e-cf70-47c1-86c5-dbd05e0cc616.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Kacang Almond</h3><p>Premium Roast</p></div>
+            <div class="card-info"><h3>MIE LIDI</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/9f7XCrgJ/9c04e078-ee93-4550-8310-851e9a34d691.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Keripik Pisang</h3><p>Manis Alami</p></div>
+            <div class="card-info"><h3>MAKARONI</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/gjYGV4z5/601de701-a9b5-4bbf-8aa6-87b171349a64.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Makaroni Pedas</h3><p>Level Setan</p></div>
+            <div class="card-info"><h3>BASRENG</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/ZYcbbkj9/38611567-5f9f-4899-9d33-cffa77b5e469.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Kacang Polong</h3><p>Original Salted</p></div>
+            <div class="card-info"><h3>LUMPIA</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/sDgV1n09/16ad7cba-62a3-48d4-a52c-25fe2f379b5e.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Keripik Tempe</h3><p>Gurih Tradisional</p></div>
+            <div class="card-info"><h3>KACANG ARAB</h3></div>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bb087?q=80&w=600&auto=format&fit=crop" onclick="goToPay()">
+        <div class="card" onclick="goToPay()">
+            <img src="https://i.postimg.cc/sDH3Wpk1/129f1f36-b98b-4f99-bdde-93c543eb32e8.jpg">
             <span class="price">$2.5</span>
-            <div class="card-info"><h3>Popcorn Karamel</h3><p>Bioskop Vibe</p></div>
+            <div class="card-info"><h3>KACANG MADU</h3></div>
         </div>
     </div>
 
     <div id="qris-area">
-        <h3>SILAKAN SCAN & BAYAR</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg">
-        <p>Setelah bayar $2.5 (10,000 Riel), klik tombol di bawah untuk konfirmasi pesanan!</p>
-        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" class="order-btn">SUDAH BAYAR? ISI FORM DISINI</a>
+        <h2>SCAN UNTUK BAYAR ($2.5)</h2>
+        <img src="qris.jpg" alt="Barcode Pembayaran">
+        <p>Pastikan nominal sesuai ya, Bos! Setelah transfer silakan klik tombol konfirmasi di bawah.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpGZ_sQQGpM5BlTaBT4eUBtDmTTVw4kMBCRnUGp3PjlM_vdw/viewform" class="order-btn">SUDAH BAYAR? ISI FORM</a>
     </div>
 
     <footer>
-        &copy; 2026 PITER SNACKS CAMBODIA • All Rights Reserved
+        &copy; 2026 PITER SNACKS • MADE BY ALVIN PHANESTU
     </footer>
 
     <audio id="bgMusic" loop>
@@ -135,31 +130,23 @@
     </audio>
 
     <script>
-        // 1. COUNTDOWN LOGIC
-        const launchDate = new Date("April 9, 2026 00:00:00").getTime();
+        // COUNTDOWN SCRIPT
+        const target = new Date("April 9, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const diff = launchDate - now;
-            if (diff < 0) {
-                document.getElementById('countdown-container').innerHTML = "<p>PITERSNACKS IS LIVE! 🔥</p>";
-                return;
-            }
-            document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
-            document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-            document.getElementById('mins').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
-            document.getElementById('secs').innerText = Math.floor((diff % (1000*60)) / 1000);
+            const d = target - now;
+            document.getElementById('days').innerText = Math.max(0, Math.floor(d / 86400000));
+            document.getElementById('hours').innerText = Math.max(0, Math.floor((d % 86400000) / 3600000));
+            document.getElementById('mins').innerText = Math.max(0, Math.floor((d % 3600000) / 60000));
+            document.getElementById('secs').innerText = Math.max(0, Math.floor((d % 60000) / 1000));
         }, 1000);
 
-        // 2. AUTOPLAY & SHOW QRIS LOGIC
+        // MUSIC & QRIS SCRIPT
         function goToPay() {
-            // Putar musik (karena user sudah berinteraksi/klik gambar)
-            const music = document.getElementById('bgMusic');
-            music.play();
-            
-            // Munculkan QRIS area
-            const qris = document.getElementById('qris-area');
-            qris.style.display = 'block';
-            qris.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('bgMusic').play();
+            const qa = document.getElementById('qris-area');
+            qa.style.display = 'block';
+            qa.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
