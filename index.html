@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS.ID </title>
+    <title>PITERSNACKS - Premium Checkout</title>
     <style>
         :root { --primary: #f7941d; --dark: #1a1a1a; --aba: #005a8d; --success: #27ae60; }
         body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: var(--dark); text-align: center; padding-bottom: 120px; overflow-x: hidden; }
@@ -17,11 +17,11 @@
             to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        header { padding: 20px 10px; background: Black; border-bottom: 1px solid #eee; position: relative; z-index: 10; }
-        .logo-box { width: 50px; height: 50px; border: 3px solid var(--primary); border-radius: 10px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: var(--primary); }
+        header { padding: 30px 20px; background: white; border-bottom: 1px solid #eee; position: relative; z-index: 10; }
+        .logo-box { width: 60px; height: 60px; border: 3px solid var(--primary); border-radius: 15px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: var(--primary); }
         
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 800px; margin: 0 auto; }
-        .card { background: Black; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
         .card img { width: 100%; height: 140px; object-fit: cover; }
         .card-info { padding: 10px; }
         .card-name { font-size: 0.7em; font-weight: 800; margin-bottom: 8px; height: 30px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
@@ -51,14 +51,11 @@
 </head>
 <body>
 
-   <header>
-    <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header" alt="Logo TERSNACKS">
-    
-    <div class="header-text">
-        <h2 style="margin:0; font-size: 1.2em; letter-spacing: 1px;">TERSNACKS</h2>
-        <p style="margin:0; font-size:0.7em; color:var(--primary); font-weight:bold;">PREMIUM QUALITY • $2.50</p>
-    </div>
-</header>
+    <header>
+        <div class="logo-box">P</div>
+        <h2 style="margin:0; letter-spacing:2px;">TERSNACKS</h2>
+        <p style="margin:5px 0 0; opacity:0.6; font-size:0.8em; font-weight:bold;">PREMIUM QUALITY • $2.50 / PACK</p>
+    </header>
 
     <div class="grid" id="container-snack"></div>
 
@@ -115,7 +112,7 @@
         function createMacaroni() {
             const macaroni = document.createElement('div');
             macaroni.classList.add('macaroni');
-            macaroni.innerText = '🍤🍪'; // Simbol makaroni/snack
+            macaroni.innerText = '🍤'; // Simbol makaroni/snack
             macaroni.style.left = Math.random() * 100 + 'vw';
             macaroni.style.animationDuration = Math.random() * 2 + 3 + 's';
             document.body.appendChild(macaroni);
