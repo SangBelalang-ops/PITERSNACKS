@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERSNACKS.ID - PREMIUM DARK</title>
     <style>
-        /* Variabel Warna Permanen Gelap */
         :root { 
             --primary: #f7941d; 
             --dark: #1a1a1a; 
@@ -29,20 +28,20 @@
             overflow-x: hidden; 
         }
         
-        /* Efek Hujan Makaroni */
-        .macaroni {
-            position: fixed; top: -50px; font-size: 24px; z-index: 9999;
-            pointer-events: none; animation: fall linear forwards;
-            opacity: 0.4;
+        header { 
+            padding: 30px 20px; 
+            background: var(--header-bg); 
+            border-bottom: 3px solid var(--primary); 
+            position: relative; 
+            z-index: 10;
         }
-        @keyframes fall {
-            to { transform: translateY(105vh) rotate(360deg); }
-        }
-
-        header { padding: 30px 20px; background: var(--header-bg); border-bottom: 2px solid var(--primary); position: relative; z-index: 10; }
         
-        /* Logo Header Tetap Aman */
-        .logo-header { width: 80px; height: auto; margin-bottom: 15px; }
+        /* LOGO SEGEDE TADI (120PX) */
+        .logo-header { 
+            width: 120px !important; 
+            height: auto !important; 
+            margin-bottom: 15px; 
+        }
 
         /* Efek Kilap Premium */
         .premium-text {
@@ -55,6 +54,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 3s linear infinite;
+            display: inline-block;
         }
 
         @keyframes shine {
@@ -63,7 +63,7 @@
 
         .slogan-italic {
             margin: 10px 0 0;
-            font-size: 1em;
+            font-size: 1.1em;
             color: var(--primary);
             font-weight: bold;
             font-style: italic;
@@ -78,12 +78,11 @@
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; padding-bottom: 10px; }
         .btn-qty { background: #333; border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; }
-        .btn-qty:active { background: var(--primary); }
         .qty-val { font-weight: 800; font-size: 1em; min-width: 20px; color: var(--primary); }
 
         #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: white; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; border-radius: 20px 20px 0 0; border-top: 2px solid var(--primary); }
         .total-price { font-weight: 900; font-size: 1.2em; color: var(--primary); }
-        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(247, 148, 29, 0.3); }
+        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
         #payment-area { display:none; padding: 40px 20px; background: var(--payment-bg); border-top: 2px solid var(--border-color); margin-top: 30px; }
         .input-nama { width: 80%; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); margin-bottom: 20px; font-size: 1em; text-align: center; font-weight: bold; background: #222; color: white; }
@@ -159,17 +158,6 @@
         ];
 
         let cart = {};
-
-        function createMacaroni() {
-            const macaroni = document.createElement('div');
-            macaroni.classList.add('macaroni');
-            macaroni.innerText = '🍤';
-            macaroni.style.left = Math.random() * 100 + 'vw';
-            macaroni.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(macaroni);
-            setTimeout(() => { macaroni.remove(); }, 5000);
-        }
-        setInterval(createMacaroni, 500);
 
         function init() {
             const grid = document.getElementById('container-snack');
