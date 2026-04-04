@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS.ID </title>
+    <title>TERSNACKS.ID - PREMIUM DARK</title>
     <style>
         /* Variabel Warna Permanen Gelap */
         :root { 
@@ -11,10 +11,10 @@
             --dark: #1a1a1a; 
             --aba: #005a8d; 
             --success: #27ae60; 
-            --bg-body: #121212; /* Gelap */
-            --bg-card: #1e1e1e; /* Kartu abu gelap */
-            --text-color: #f1f1f1; /* Teks putih tulang */
-            --border-color: #333; /* Border gelap */
+            --bg-body: #121212; 
+            --bg-card: #1e1e1e; 
+            --text-color: #f1f1f1; 
+            --border-color: #333; 
             --header-bg: #1a1a1a; 
             --payment-bg: #1e1b10; 
         }
@@ -33,29 +33,57 @@
         .macaroni {
             position: fixed; top: -50px; font-size: 24px; z-index: 9999;
             pointer-events: none; animation: fall linear forwards;
-            opacity: 0.8; /* Dikurangi dikit biar gak silau di mode gelap */
+            opacity: 0.4;
         }
         @keyframes fall {
             to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        header { padding: 30px 20px; background: var(--header-bg); border-bottom: 1px solid var(--border-color); position: relative; z-index: 10; }
-        .logo-box { width: 60px; height: 60px; border: 3px solid var(--primary); border-radius: 15px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: var(--primary); }
+        header { padding: 30px 20px; background: var(--header-bg); border-bottom: 2px solid var(--primary); position: relative; z-index: 10; }
         
+        /* Logo Header Tetap Aman */
+        .logo-header { width: 60px; height: auto; margin-bottom: 10px; }
+
+        /* Efek Kilap Premium */
+        .premium-text {
+            font-size: 1.8em;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            background: linear-gradient(110deg, #f7941d 20%, #000 45%, #fff 50%, #000 55%, #f7941d 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .slogan-italic {
+            margin: 10px 0 0;
+            font-size: 1em;
+            color: var(--primary);
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 800px; margin: 0 auto; }
-        .card { background: var(--bg-card); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid var(--border-color); transition: 0.3s; }
-        .card img { width: 100%; height: 140px; object-fit: cover; filter: brightness(0.8); } /* Gambar agak redup biar matching */
+        .card { background: var(--bg-card); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border: 1px solid var(--border-color); transition: 0.3s; }
+        .card img { width: 100%; height: 140px; object-fit: cover; filter: brightness(0.8); }
         .card-info { padding: 10px; }
         .card-name { font-size: 0.7em; font-weight: 800; margin-bottom: 8px; height: 30px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; color: var(--text-color); }
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; padding-bottom: 10px; }
         .btn-qty { background: #333; border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; }
-        .btn-qty:active { background: var(--primary); color: white; }
+        .btn-qty:active { background: var(--primary); }
         .qty-val { font-weight: 800; font-size: 1em; min-width: 20px; color: var(--primary); }
 
-        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: white; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); border-radius: 20px 20px 0 0; border-top: 1px solid var(--border-color); }
+        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: white; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; border-radius: 20px 20px 0 0; border-top: 2px solid var(--primary); }
         .total-price { font-weight: 900; font-size: 1.2em; color: var(--primary); }
-        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(247, 148, 29, 0.3); }
 
         #payment-area { display:none; padding: 40px 20px; background: var(--payment-bg); border-top: 2px solid var(--border-color); margin-top: 30px; }
         .input-nama { width: 80%; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); margin-bottom: 20px; font-size: 1em; text-align: center; font-weight: bold; background: #222; color: white; }
@@ -66,7 +94,7 @@
         .qr-box { margin-top: 20px; display: none; }
         .qr-box img { width: 260px; border: 8px solid white; border-radius: 15px; }
 
-        .final-btn { display: inline-block; background: var(--success); color: white; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; margin-top: 30px; width: 85%; cursor: pointer; font-size: 1em; }
+        .final-btn { display: inline-block; background: var(--success); color: white; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; margin-top: 30px; width: 85%; cursor: pointer; font-size: 1.1em; }
 
         @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
@@ -76,38 +104,8 @@
    <header>
     <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header" alt="Logo TERSNACKS">
     <div class="header-text">
-        <div style="margin-top: 8px;">
-            <span style="
-                font-size: 1.6em; 
-                font-style: italic; 
-                font-weight: 900; 
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                background: linear-gradient(145deg, #f7941d 20%, #ffc107 40%, #000 50%, #f7941d 80%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                display: inline-block;
-                filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5));
-            ">PREMIUM<
-            
-            <span style="
-                color: #fff; 
-                font-size: 1.2em; 
-                font-style: italic; 
-                font-weight: 300;
-                margin-left: 5px;
-            ">QUALITY</span>
-        </div>
-
-        <p style="
-            margin: 8px 0 0; 
-            font-size: 0.95em; 
-            color: var(--primary); 
-            font-weight: bold; 
-            font-style: italic;
-            opacity: 0.9;
-            letter-spacing: 0.5px;
-        ">"Temanin suntukmu dikala jari mengetik"</p>
+        <div class="premium-text">PREMIUM QUALITY</div>
+        <p class="slogan-italic">"Temanin suntukmu dikala jari mengetik"</p>
     </div>
 </header>
 
@@ -123,7 +121,7 @@
 
     <div id="payment-area">
         <h3 style="color: var(--primary);">DATA PEMBELI</h3>
-        <input type="text" id="nama-pembeli" class="input-nama" placeholder="Masukkan Nama dan Web ya ..." required>
+        <input type="text" id="nama-pembeli" class="input-nama" placeholder="Masukkan Nama Anda..." required>
         
         <h3 style="color: var(--primary);">PILIH PEMBAYARAN ABA</h3>
         <div class="pay-options">
@@ -232,7 +230,6 @@
         function sendToSpreadsheet() {
             const nama = document.getElementById('nama-pembeli').value;
             if(!nama) { alert("Nama jangan kosong dong, Bos!"); return; }
-
             let list = []; let totalUSD = 0;
             Object.keys(cart).forEach(id => {
                 if(cart[id] > 0) {
@@ -240,25 +237,15 @@
                     list.push(`${cart[id]}x ${snackData[id].name}`);
                 }
             });
-
             const btn = document.getElementById('submit-btn');
             btn.innerText = "MENGIRIM..."; btn.disabled = true;
-
             const scriptURL = "https://script.google.com/macros/s/AKfycby-koR4z1YFZYSs3XPAkrGMdpBcN7tqx_1i1JAf4W5vo9Ka-0w8NjYrMFXHIytVZ6FY/exec";
-            
             const params = new URLSearchParams();
             params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
             params.append('total', "$" + totalUSD.toFixed(2));
-
             fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
-            .then(() => {
-                alert(`MANTAP ${nama}! Pesanan sudah masuk ke Sheets.`);
-                location.reload();
-            })
-            .catch(() => {
-                alert("Berhasil Terkirim!");
-                location.reload();
-            });
+            .then(() => { alert(`MANTAP ${nama}! Pesanan sudah masuk ke Sheets.`); location.reload(); })
+            .catch(() => { alert("Berhasil Terkirim!"); location.reload(); });
         }
         init();
     </script>
