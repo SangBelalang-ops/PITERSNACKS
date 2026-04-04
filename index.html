@@ -3,95 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS.ID </title>
+    <title>TERSNACKS.ID - DARK DOVE EDITION</title>
     <style>
-        :root { --primary: #f7941d; --dark: #1a1a1a; --aba: #005a8d; --success: #27ae60; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: var(--dark); text-align: center; padding-bottom: 120px; overflow-x: hidden; }
+        /* Palette Dark Dove */
+        :root { 
+            --primary: #f7941d; 
+            --dove-dark: #1a1c1e; /* Background utama */
+            --dove-card: #2d3135; /* Warna kartu */
+            --dove-light: #b0b8c1; /* Warna teks sekunder */
+            --aba: #00a8ff; 
+            --success: #2ecc71; 
+            --border: #3f444a;
+        }
         
-        /* Efek Hujan Makaroni */
+        body { 
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; padding: 0; 
+            background: var(--dove-dark) !important; 
+            color: #ffffff !important; 
+            text-align: center; 
+            padding-bottom: 120px; 
+            overflow-x: hidden; 
+        }
+
+        /* Efek Hujan Makaroni (Disesuaikan opacity-nya biar nggak ganggu) */
         .macaroni {
             position: fixed; top: -50px; font-size: 24px; z-index: 9999;
             pointer-events: none; animation: fall linear forwards;
+            opacity: 0.4;
         }
         @keyframes fall {
             to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        header { padding: 30px 20px; background: white; border-bottom: 1px solid #eee; position: relative; z-index: 10; }
-        .logo-box { width: 60px; height: 60px; border: 3px solid var(--primary); border-radius: 15px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: var(--primary); }
+        /* Header Dove Style */
+        header { 
+            padding: 25px 20px; 
+            background: #141618; 
+            border-bottom: 2px solid var(--primary); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .logo-header { height: 60px !important; width: auto !important; margin-bottom: 10px; }
+
+        /* Grid System */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px; 
+            padding: 20px; 
+            max-width: 850px; 
+            margin: 0 auto; 
+        }
+
+        /* Card Styling Dark Dove */
+        .card { 
+            background: var(--dove-card) !important; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); 
+            border: 1px solid var(--border); 
+            transition: 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+        .card img { width: 100%; height: 140px; object-fit: cover; filter: brightness(0.9); }
         
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 800px; margin: 0 auto; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
-        .card img { width: 100%; height: 140px; object-fit: cover; }
-        .card-info { padding: 10px; }
-        .card-name { font-size: 0.7em; font-weight: 800; margin-bottom: 8px; height: 30px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
+        .card-info { padding: 15px; }
+        .card-name { 
+            font-size: 0.75em; 
+            font-weight: 800; 
+            margin-bottom: 12px; 
+            height: 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
 
-        .counter { display: flex; justify-content: center; align-items: center; gap: 8px; padding-bottom: 10px; }
-        .btn-qty { background: #f0f0f0; border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        .btn-qty:active { background: var(--primary); color: white; }
-        .qty-val { font-weight: 800; font-size: 1em; min-width: 20px; }
+        /* Qty Controls */
+        .counter { display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-qty { 
+            background: #3f444a; 
+            border: none; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            color: white;
+            transition: 0.2s;
+        }
+        .btn-qty:active { background: var(--primary); }
+        .qty-val { font-weight: 800; font-size: 1.1em; min-width: 20px; color: var(--primary); }
 
-        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); color: white; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.3); border-radius: 20px 20px 0 0; }
-        .total-price { font-weight: 900; font-size: 1.2em; color: var(--primary); }
-        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        /* Floating Total Bar */
+        #total-bar { 
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: #141618; 
+            color: white; 
+            padding: 20px 25px; 
+            display: none; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 1000; 
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.6); 
+            border-radius: 25px 25px 0 0;
+            border-top: 1px solid var(--border);
+        }
+        .total-price { font-weight: 900; font-size: 1.4em; color: var(--primary); }
+        .btn-order { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 14px 30px; 
+            border-radius: 15px; 
+            font-weight: 900; 
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(247, 148, 29, 0.4);
+        }
 
-        #payment-area { display:none; padding: 40px 20px; background: #fffbe6; border-top: 2px solid #f9eebc; margin-top: 30px; }
-        .input-nama { width: 80%; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); margin-bottom: 20px; font-size: 1em; text-align: center; font-weight: bold; }
+        /* Payment Area */
+        #payment-area { 
+            display:none; 
+            padding: 45px 20px; 
+            background: #1e2124 !important; 
+            border-top: 2px solid var(--border); 
+            margin-top: 30px; 
+        }
+        .input-nama { 
+            width: 85%; padding: 18px; 
+            border-radius: 12px; 
+            border: 2px solid var(--border); 
+            background: #2d3135;
+            color: white;
+            margin-bottom: 25px; 
+            font-size: 1em; 
+            text-align: center; 
+            font-weight: bold; 
+        }
+        .input-nama:focus { border-color: var(--primary); outline: none; }
         
-        .pay-options { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
-        .pay-btn { padding: 12px 20px; border: 2px solid var(--aba); border-radius: 10px; background: white; color: var(--aba); font-weight: bold; cursor: pointer; }
+        .pay-options { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .pay-btn { padding: 15px 25px; border: 2px solid var(--aba); border-radius: 12px; background: transparent; color: var(--aba); font-weight: bold; cursor: pointer; flex: 1; max-width: 150px; }
         .pay-btn.active { background: var(--aba); color: white; }
-        .qr-box { display: none; margin-top: 20px; }
-        .qr-box img { width: 260px; border: 8px solid white; border-radius: 15px; }
+        
+        .qr-box { display: none; margin-top: 25px; }
+        .qr-box img { width: 280px; border: 8px solid #2d3135; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        .final-btn { display: inline-block; background: var(--success); color: white; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; margin-top: 30px; width: 85%; cursor: pointer; font-size: 1em; }
+        .final-btn { display: inline-block; background: var(--success); color: white; padding: 20px; border: none; border-radius: 50px; font-weight: 900; margin-top: 40px; width: 90%; cursor: pointer; font-size: 1.1em; }
 
-        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); padding: 10px; } }
     </style>
 </head>
 <body>
 
    <header>
-    <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header" alt="Logo TERSNACKS">
-    
-    <div class="header-text">
-        <h2 style="margin:0; font-size: 1.2em; letter-spacing: 1px;">TERSNACKS</h2>
-        <p style="margin:0; font-size:0.7em; color:var(--primary); font-weight:bold;">PREMIUM QUALITY • $2.50</p>
-    </div>
-</header>
+        <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header" alt="Logo TERSNACKS">
+        <div class="header-text">
+            <h2 style="margin:0; font-size: 1.4em; letter-spacing: 2px; color: #fff;">TERSNACKS</h2>
+            <p style="margin:0; font-size:0.75em; color:var(--primary); font-weight:bold; letter-spacing: 1px;">PREMIUM QUALITY • $2.50</p>
+        </div>
+    </header>
 
     <div class="grid" id="container-snack"></div>
 
     <div id="total-bar">
         <div class="total-info" style="text-align:left;">
-            <div id="summary" style="font-size: 0.65em; opacity: 0.7; margin-bottom: 2px;">Pilih snack...</div>
+            <div id="summary" style="font-size: 0.7em; color: var(--dove-light); margin-bottom: 3px;">Pilih menu...</div>
             <div class="total-price" id="display-total">$0.00</div>
         </div>
         <button class="btn-order" onclick="openPayment()">ORDER SEKARANG</button>
     </div>
 
     <div id="payment-area">
-        <h3>DATA PEMBELI</h3>
-        <input type="text" id="nama-pembeli" class="input-nama" placeholder="Masukkan Nama Anda..." required>
+        <h3 style="color: var(--primary); letter-spacing: 1px;">INFO PEMESAN</h3>
+        <input type="text" id="nama-pembeli" class="input-nama" placeholder="Tulis Nama Anda..." required>
         
-        <h3>PILIH PEMBAYARAN ABA</h3>
+        <h3 style="color: var(--primary); letter-spacing: 1px;">METODE BAYAR (ABA)</h3>
         <div class="pay-options">
             <button class="pay-btn" onclick="showQR('usd', this)">USD ($)</button>
             <button class="pay-btn" onclick="showQR('riel', this)">RIEL (៛)</button>
         </div>
 
         <div id="qr-usd" class="qr-box">
-            <p>Scan ABA (USD):</p>
+            <p style="color: var(--dove-light);">Scan QR USD:</p>
             <img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg">
         </div>
 
         <div id="qr-riel" class="qr-box">
-            <p>Scan ABA (RIEL):</p>
+            <p style="color: var(--dove-light);">Scan QR RIEL:</p>
             <img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg">
         </div>
 
-        <p style="margin-top:20px; font-size:0.85em; opacity:0.8; font-weight:bold;">Sudah bayar? Klik konfirmasi!</p>
-        <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI PESANAN</button>
+        <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI PESANAN ✅</button>
     </div>
 
     <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mpeg"></audio>
@@ -111,17 +220,16 @@
 
         let cart = {};
 
-        // Fungsi Hujan Makaroni
         function createMacaroni() {
             const macaroni = document.createElement('div');
             macaroni.classList.add('macaroni');
-            macaroni.innerText = '🍤'; // Simbol makaroni/snack
+            macaroni.innerText = '🍤';
             macaroni.style.left = Math.random() * 100 + 'vw';
             macaroni.style.animationDuration = Math.random() * 2 + 3 + 's';
             document.body.appendChild(macaroni);
             setTimeout(() => { macaroni.remove(); }, 5000);
         }
-        setInterval(createMacaroni, 500);
+        setInterval(createMacaroni, 800); // Diperlambat sedikit biar nggak berat
 
         function init() {
             const grid = document.getElementById('container-snack');
@@ -181,7 +289,7 @@
 
         function sendToSpreadsheet() {
             const nama = document.getElementById('nama-pembeli').value;
-            if(!nama) { alert("Nama jangan kosong dong, Bos!"); return; }
+            if(!nama) { alert("Isi nama dulu, Bos Alvin!"); return; }
 
             let list = []; let totalUSD = 0;
             Object.keys(cart).forEach(id => {
@@ -192,18 +300,16 @@
             });
 
             const btn = document.getElementById('submit-btn');
-            btn.innerText = "MENGIRIM..."; btn.disabled = true;
+            btn.innerText = "SEDANG MENGIRIM..."; btn.disabled = true;
 
-            // URL APPS SCRIPT SAKTI BARU
             const scriptURL = "https://script.google.com/macros/s/AKfycby-koR4z1YFZYSs3XPAkrGMdpBcN7tqx_1i1JAf4W5vo9Ka-0w8NjYrMFXHIytVZ6FY/exec";
-            
             const params = new URLSearchParams();
-            params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
+            params.append('pesanan', `Nama: ${nama} | Order: ${list.join(", ")}`);
             params.append('total', "$" + totalUSD.toFixed(2));
 
             fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
             .then(() => {
-                alert(`MANTAP ${nama}! Pesanan sudah masuk ke Sheets.`);
+                alert(`PESANAN BERHASIL! Terima kasih ${nama}.`);
                 location.reload();
             })
             .catch(() => {
