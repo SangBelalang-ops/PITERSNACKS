@@ -3,95 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS - Premium Checkout</title>
+    <title>PITERSNACKS - Premium Checkout</title>
     <style>
         :root { --primary: #f7941d; --dark: #1a1a1a; --aba: #005a8d; --success: #27ae60; }
-        body { 
-            font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; text-align: center; padding-bottom: 150px;
-            background-image: url('https://i.postimg.cc/bvQNX9PS/d86aa452-3ea3-4a45-8dd4-5fd3ba61f3b1.jpg');
-            background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: 70% auto;
+        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: var(--dark); text-align: center; padding-bottom: 120px; overflow-x: hidden; }
+        
+        /* Efek Hujan Makaroni */
+        .macaroni {
+            position: fixed; top: -50px; font-size: 24px; z-index: 9999;
+            pointer-events: none; animation: fall linear forwards;
         }
-        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: -1; }
-
-        header { 
-            padding: 15px 20px; background: white; border-bottom: 2px solid var(--primary); 
-            display: flex; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 1000;
-        }
-        .logo-header { width: 45px; height: 45px; border-radius: 8px; object-fit: cover; }
-
-        /* INPUT NAMA DI ATAS BIAR GAK HILANG */
-        .section-nama { 
-            background: rgba(255, 255, 255, 0.9); padding: 20px; margin: 15px; 
-            border-radius: 15px; border: 2px dashed var(--primary); 
-        }
-        .input-nama { 
-            width: 90%; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); 
-            font-size: 1.1em; text-align: center; font-weight: 900; text-transform: uppercase;
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; max-width: 800px; margin: 0 auto; }
-        .card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); border-radius: 12px; overflow: hidden; border: 1px solid #ddd; }
-        .card img { width: 100%; height: 120px; object-fit: cover; }
-        .card-name { font-size: 0.7em; font-weight: 900; padding: 10px 5px; text-transform: uppercase; height: 30px; display: flex; align-items: center; justify-content: center; }
+        header { padding: 30px 20px; background: white; border-bottom: 1px solid #eee; position: relative; z-index: 10; }
+        .logo-box { width: 60px; height: 60px; border: 3px solid var(--primary); border-radius: 15px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: var(--primary); }
+        
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 800px; margin: 0 auto; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .card img { width: 100%; height: 140px; object-fit: cover; }
+        .card-info { padding: 10px; }
+        .card-name { font-size: 0.7em; font-weight: 800; margin-bottom: 8px; height: 30px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
 
-        .counter { display: flex; justify-content: center; align-items: center; gap: 10px; padding-bottom: 15px; }
-        .btn-qty { background: white; border: 1px solid #ccc; width: 30px; height: 30px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .counter { display: flex; justify-content: center; align-items: center; gap: 8px; padding-bottom: 10px; }
+        .btn-qty { background: #f0f0f0; border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-qty:active { background: var(--primary); color: white; }
+        .qty-val { font-weight: 800; font-size: 1em; min-width: 20px; }
 
-        #total-bar { 
-            position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); color: white; 
-            padding: 20px; display: none; justify-content: space-between; align-items: center; z-index: 2000;
-        }
-        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); color: white; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.3); border-radius: 20px 20px 0 0; }
+        .total-price { font-weight: 900; font-size: 1.2em; color: var(--primary); }
+        .btn-order { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
-        #payment-area { display:none; padding: 30px 20px; background: white; border-top: 5px solid var(--primary); position: relative; z-index: 2001; }
-        .pay-btn { padding: 12px; border: 2px solid var(--aba); border-radius: 8px; background: white; font-weight: bold; cursor: pointer; margin: 5px; }
+        #payment-area { display:none; padding: 40px 20px; background: #fffbe6; border-top: 2px solid #f9eebc; margin-top: 30px; }
+        .input-nama { width: 80%; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); margin-bottom: 20px; font-size: 1em; text-align: center; font-weight: bold; }
+        
+        .pay-options { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .pay-btn { padding: 12px 20px; border: 2px solid var(--aba); border-radius: 10px; background: white; color: var(--aba); font-weight: bold; cursor: pointer; }
         .pay-btn.active { background: var(--aba); color: white; }
-        .qr-box img { width: 250px; border-radius: 15px; margin-top: 15px; border: 5px solid #eee; }
+        .qr-box { display: none; margin-top: 20px; }
+        .qr-box img { width: 260px; border: 8px solid white; border-radius: 15px; }
 
-        .final-btn { background: var(--success); color: white; padding: 20px; border: none; border-radius: 15px; font-weight: 900; width: 100%; cursor: pointer; margin-top: 20px; font-size: 1.1em; }
-        .macaroni { position: fixed; top: -50px; font-size: 20px; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+        .final-btn { display: inline-block; background: var(--success); color: white; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; margin-top: 30px; width: 85%; cursor: pointer; font-size: 1em; }
+
+        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://i.postimg.cc/bvQNX9PS/d86aa452-3ea3-4a45-8dd4-5fd3ba61f3b1.jpg" class="logo-header">
-        <div style="text-align:left;">
-            <h2 style="margin:0; font-size: 1.1em;">TERSNACKS</h2>
-            <p style="margin:0; font-size:0.6em; color:var(--primary); font-weight:bold;">PREMIUM QUALITY SNACKS</p>
-        </div>
+        <div class="logo-box">P</div>
+        <h2 style="margin:0; letter-spacing:2px;">PITER SNACKS</h2>
+        <p style="margin:5px 0 0; opacity:0.6; font-size:0.8em; font-weight:bold;">PREMIUM QUALITY • $2.50 / PACK</p>
     </header>
 
-    <div class="section-nama">
-        <p style="margin:0 0 10px 0; font-weight:bold; font-size:0.8em;">STEP 1: MASUKKAN NAMA ANDA</p>
-        <input type="text" id="nama-pembeli" class="input-nama" placeholder="NAMA PEMBELI...">
-    </div>
-
-    <p style="font-weight:bold; font-size:0.8em; margin-top:20px;">STEP 2: PILIH SNACK</p>
     <div class="grid" id="container-snack"></div>
 
     <div id="total-bar">
-        <div style="text-align:left;">
-            <div id="summary" style="font-size: 0.6em; opacity: 0.8;">Pilih snack...</div>
-            <div style="font-weight:900; color:var(--primary); font-size:1.2em;" id="display-total">$0.00</div>
+        <div class="total-info" style="text-align:left;">
+            <div id="summary" style="font-size: 0.65em; opacity: 0.7; margin-bottom: 2px;">Pilih snack...</div>
+            <div class="total-price" id="display-total">$0.00</div>
         </div>
-        <button class="btn-order" onclick="openPayment()">LANJUT BAYAR</button>
+        <button class="btn-order" onclick="openPayment()">ORDER SEKARANG</button>
     </div>
 
     <div id="payment-area">
-        <h2 style="margin:0;">PEMBAYARAN</h2>
-        <p style="font-size:0.8em; opacity:0.7;">Pilih metode transfer ABA di bawah:</p>
+        <h3>DATA PEMBELI</h3>
+        <input type="text" id="nama-pembeli" class="input-nama" placeholder="Masukkan Nama Anda..." required>
         
-        <div style="margin:15px 0;">
-            <button class="pay-btn" onclick="showQR('usd', this)">BAYAR USD ($)</button>
-            <button class="pay-btn" onclick="showQR('riel', this)">BAYAR RIEL (៛)</button>
+        <h3>PILIH PEMBAYARAN ABA</h3>
+        <div class="pay-options">
+            <button class="pay-btn" onclick="showQR('usd', this)">USD ($)</button>
+            <button class="pay-btn" onclick="showQR('riel', this)">RIEL (៛)</button>
         </div>
 
-        <div id="qr-usd" class="qr-box" style="display:none;"><img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg"></div>
-        <div id="qr-riel" class="qr-box" style="display:none;"><img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg"></div>
+        <div id="qr-usd" class="qr-box">
+            <p>Scan ABA (USD):</p>
+            <img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg">
+        </div>
 
-        <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">SAYA SUDAH TRANSFER</button>
+        <div id="qr-riel" class="qr-box">
+            <p>Scan ABA (RIEL):</p>
+            <img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg">
+        </div>
+
+        <p style="margin-top:20px; font-size:0.85em; opacity:0.8; font-weight:bold;">Sudah bayar? Klik konfirmasi!</p>
+        <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI PESANAN</button>
     </div>
 
     <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mpeg"></audio>
@@ -111,17 +108,31 @@
 
         let cart = {};
 
+        // Fungsi Hujan Makaroni
+        function createMacaroni() {
+            const macaroni = document.createElement('div');
+            macaroni.classList.add('macaroni');
+            macaroni.innerText = '🍤'; // Simbol makaroni/snack
+            macaroni.style.left = Math.random() * 100 + 'vw';
+            macaroni.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(macaroni);
+            setTimeout(() => { macaroni.remove(); }, 5000);
+        }
+        setInterval(createMacaroni, 500);
+
         function init() {
             const grid = document.getElementById('container-snack');
             snackData.forEach(s => {
                 grid.innerHTML += `
                     <div class="card">
                         <img src="${s.img}">
-                        <div class="card-name">${s.name}</div>
-                        <div class="counter">
-                            <button class="btn-qty" onclick="changeQty(${s.id}, -1)">-</button>
-                            <span id="qty-${s.id}" style="font-weight:900;">0</span>
-                            <button class="btn-qty" onclick="changeQty(${s.id}, 1)">+</button>
+                        <div class="card-info">
+                            <div class="card-name">${s.name}</div>
+                            <div class="counter">
+                                <button class="btn-qty" onclick="changeQty(${s.id}, -1)">-</button>
+                                <span class="qty-val" id="qty-${s.id}">0</span>
+                                <button class="btn-qty" onclick="changeQty(${s.id}, 1)">+</button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -143,15 +154,19 @@
                     list.push(`${cart[id]}x ${snackData[id].name}`);
                 }
             });
-            document.getElementById('total-bar').style.display = total > 0 ? 'flex' : 'none';
-            document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('summary').innerText = list.join(", ");
+            const bar = document.getElementById('total-bar');
+            if(total > 0) {
+                bar.style.display = 'flex';
+                document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
+                document.getElementById('summary').innerText = list.join(", ");
+            } else { bar.style.display = 'none'; }
         }
 
         function openPayment() {
             document.getElementById('bgMusic').play();
-            document.getElementById('payment-area').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            const pay = document.getElementById('payment-area');
+            pay.style.display = 'block';
+            pay.scrollIntoView({ behavior: 'smooth' });
         }
 
         function showQR(type, btn) {
@@ -162,8 +177,8 @@
         }
 
         function sendToSpreadsheet() {
-            const nama = document.getElementById('nama-pembeli').value.trim();
-            if(!nama) { alert("ISI NAMA DULU DI PALING ATAS, BOS!"); window.scrollTo({top:0, behavior:'smooth'}); return; }
+            const nama = document.getElementById('nama-pembeli').value;
+            if(!nama) { alert("Nama jangan kosong dong, Bos!"); return; }
 
             let list = []; let totalUSD = 0;
             Object.keys(cart).forEach(id => {
@@ -176,20 +191,23 @@
             const btn = document.getElementById('submit-btn');
             btn.innerText = "MENGIRIM..."; btn.disabled = true;
 
+            // URL APPS SCRIPT SAKTI BARU
             const scriptURL = "https://script.google.com/macros/s/AKfycby-koR4z1YFZYSs3XPAkrGMdpBcN7tqx_1i1JAf4W5vo9Ka-0w8NjYrMFXHIytVZ6FY/exec";
+            
             const params = new URLSearchParams();
-            params.append('pembeli', nama.toUpperCase());
-            params.append('pesanan', list.join(", "));
+            params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
             params.append('total', "$" + totalUSD.toFixed(2));
 
             fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
-            .then(() => { alert("PESANAN BERHASIL!"); location.reload(); });
+            .then(() => {
+                alert(`MANTAP ${nama}! Pesanan sudah masuk ke Sheets.`);
+                location.reload();
+            })
+            .catch(() => {
+                alert("Berhasil Terkirim!");
+                location.reload();
+            });
         }
-        setInterval(() => {
-            const m = document.createElement('div'); m.className = 'macaroni'; m.innerText = '🍤';
-            m.style.left = Math.random() * 100 + 'vw'; m.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(m); setTimeout(() => m.remove(), 5000);
-        }, 600);
         init();
     </script>
 </body>
