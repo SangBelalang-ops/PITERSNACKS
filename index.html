@@ -8,10 +8,12 @@
         :root { --primary: #f7941d; --glass: rgba(18, 18, 18, 0.9); --aba: #005a8d; --success: #27ae60; --danger: #e74c3c; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #000; color: white; text-align: center; padding-bottom: 50px; overflow-x: hidden; }
         
-        /* EFEK HUJAN MAKARONI */
+        /* EFEK HUJAN MAKARONI - DIBIKIN LEBIH NYATA */
         .falling-snack {
-            position: fixed; top: -50px; font-size: 24px; z-index: 0;
+            position: fixed; top: -50px; font-size: 28px; z-index: 100;
             user-select: none; pointer-events: none; animation: fall linear forwards;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8)); /* Biar putihnya terang */
+            color: #fff;
         }
         @keyframes fall {
             to { transform: translateY(110vh) rotate(360deg); }
@@ -41,9 +43,9 @@
         .card-name { font-size: 0.75em; font-weight: 800; color: var(--primary); height: 35px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
         
         .stock-tag { 
-            font-size: 0.65em; color: var(--primary); background: rgba(247, 148, 29, 0.1);
+            font-size: 0.65em; color: var(--primary); background: rgba(247, 148, 29, 0.2);
             border-radius: 5px; padding: 2px 8px; display: inline-block; margin-bottom: 10px;
-            font-weight: 900; border: 1px solid rgba(247, 148, 29, 0.3);
+            font-weight: 900; border: 1px solid rgba(247, 148, 29, 0.4);
         }
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -109,19 +111,20 @@
 <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbwhUXfi13J6KCnDp4l9-WcpRyMGNJSD8GXWROqE1b_1voh_5kAoLBOPYVsoxXiLbC27/exec";
 
-    // KODE HUJAN MAKARONI
+    // KODE HUJAN SNACK - DIBIKIN LEBIH JELAS
     function createSnack() {
-        const icons = ['🥨', '🍪', '🍬', '🥜'];
+        const icons = ['🥨', '🍪', '🍬', '🥜', '🍿'];
         const snack = document.createElement('div');
         snack.className = 'falling-snack';
         snack.innerText = icons[Math.floor(Math.random() * icons.length)];
         snack.style.left = Math.random() * 100 + 'vw';
-        snack.style.animationDuration = Math.random() * 3 + 2 + 's';
-        snack.style.opacity = Math.random();
+        snack.style.animationDuration = Math.random() * 2 + 3 + 's';
+        snack.style.opacity = Math.random() * 0.5 + 0.5; // Minimal opacity 50% biar kelihatan
         document.body.appendChild(snack);
         setTimeout(() => snack.remove(), 5000);
     }
-    setInterval(createSnack, 300);
+    // Percepat frekuensi jatuh
+    setInterval(createSnack, 250);
 
     let snackData = [
         { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
