@@ -35,17 +35,23 @@
         }
 
         header { 
-            padding: 25px 10px; 
+            padding: 40px 10px; /* Ditambah paddingnya biar lega */
             background: var(--glass); 
             backdrop-filter: blur(10px);
             border-bottom: 2px solid var(--primary); 
             position: relative; z-index: 10; 
         }
         
+        /* LOGO DIPERBESAR DI SINI */
         .logo-header {
-            width: 80px;
+            width: 150px; /* Ukuran sebelumnya 80px, sekarang 150px */
             height: auto;
-            filter: drop-shadow(0 0 8px rgba(247, 148, 29, 0.5));
+            filter: drop-shadow(0 0 15px rgba(247, 148, 29, 0.7));
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .logo-header:hover {
+            transform: scale(1.05);
         }
 
         .header-text h2 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
@@ -125,7 +131,7 @@
     <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header" alt="Logo TERSNACKS">
     <div class="header-text">
         <h2 style="margin:5px 0 0; font-size: 1.4em; letter-spacing: 2px; font-weight: 900;">TERSNACKS.ID</h2>
-        <p style="margin:0; font-size:0.8em; color:var(--primary); font-weight:bold; letter-spacing: 1px;">PREMIUM QUALITY • $2.50</p>
+        <p style="margin:0; font-size:0.8em; color:var(--primary); font-weight:bold; letter-spacing: 1px;">PREMIUM QUALITY • $3.00</p>
     </div>
 </header>
 
@@ -221,7 +227,7 @@
             let total = 0; let list = [];
             Object.keys(cart).forEach(id => {
                 if(cart[id] > 0) {
-                    total += cart[id] * 2.5;
+                    total += cart[id] * 3.0; // HARGA SUDAH DIUBAH JADI 3.0
                     list.push(`${cart[id]}x ${snackData[id].name}`);
                 }
             });
@@ -254,7 +260,7 @@
             let list = []; let totalUSD = 0;
             Object.keys(cart).forEach(id => {
                 if(cart[id] > 0) {
-                    totalUSD += cart[id] * 2.5;
+                    totalUSD += cart[id] * 3.0; // HARGA SUDAH DIUBAH JADI 3.0
                     list.push(`${cart[id]}x ${snackData[id].name}`);
                 }
             });
