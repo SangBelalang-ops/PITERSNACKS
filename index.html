@@ -56,6 +56,39 @@
 
         .header-text h2 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
+    /* --- COPY DARI SINI --- */
+header p {
+    margin: 0;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    
+    /* Warna Dasar Oranye + Putih di Tengah */
+    background: linear-gradient(to right, 
+        #f7941d 0%, 
+        #f7941d 40%, 
+        #ffffff 50%, 
+        #f7941d 60%, 
+        #f7941d 100%
+    );
+    
+    /* Trik Potong Background Pakai Teks */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    
+    /* Jalankan Animasi */
+    animation: slingKilat 3s infinite linear;
+}
+
+/* Tambahkan Keyframes Ini Tepat Di Bawahnya */
+@keyframes slingKilat {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+/* --- SAMPAI SINI --- */
+
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; max-width: 800px; margin: 0 auto; }
         
         .card { 
