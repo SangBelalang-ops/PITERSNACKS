@@ -30,7 +30,7 @@
         }
         @keyframes slingKilat { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; max-width: 800px; margin: 0 auto; }
+        .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; max-width: 1000px; margin: 0 auto; }
         .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(247,148,29,0.2); position: relative; }
         .card img { width: 100%; height: 130px; object-fit: cover; }
         
@@ -111,20 +111,30 @@
 <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbwhUXfi13J6KCnDp4l9-WcpRyMGNJSD8GXWROqE1b_1voh_5kAoLBOPYVsoxXiLbC27/exec";
 
-    // KODE HUJAN SNACK - DIBIKIN LEBIH JELAS
-    function createSnack() {
-        const icons = ['🥨', '🍪', '🍬', '🥜', '🍿'];
-        const snack = document.createElement('div');
-        snack.className = 'falling-snack';
-        snack.innerText = icons[Math.floor(Math.random() * icons.length)];
-        snack.style.left = Math.random() * 100 + 'vw';
-        snack.style.animationDuration = Math.random() * 2 + 3 + 's';
-        snack.style.opacity = Math.random() * 0.5 + 0.5; // Minimal opacity 50% biar kelihatan
-        document.body.appendChild(snack);
-        setTimeout(() => snack.remove(), 5000);
-    }
-    // Percepat frekuensi jatuh
-    setInterval(createSnack, 250);
+    // KODE HUJAN EDISI SONGKRAN (PURE WATER FIGHT)
+function createSnack() {
+    // Isinya cuma pistol air, ember, dan air-airan
+    const icons = ['🔫', '💦', '💧', '🌊', '🪣', '🐳']; 
+    const spray = document.createElement('div');
+    spray.className = 'falling-snack';
+    
+    // Pilih emoji secara acak
+    spray.innerText = icons[Math.floor(Math.random() * icons.length)];
+    
+    // Pengaturan posisi dan kecepatan
+    spray.style.left = Math.random() * 100 + 'vw';
+    spray.style.animationDuration = Math.random() * 2 + 1.2 + 's'; // Dibuat lebih ngebut dikit
+    spray.style.opacity = Math.random() * 0.4 + 0.7; 
+    
+    // Cahaya biru neon biar seger di background hitam
+    spray.style.filter = "drop-shadow(0 0 10px #00aaff)"; 
+    
+    document.body.appendChild(spray);
+    setTimeout(() => spray.remove(), 3000);
+}
+
+// Kecepatan semburan air (120ms biar ramai)
+setInterval(createSnack, 120);
 
     let snackData = [
         { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
@@ -136,6 +146,9 @@
         { id: 6, name: "LUMPIA", stock: 0, img: "https://i.postimg.cc/ZYcbbkj9/38611567-5f9f-4899-9d33-cffa77b5e469.jpg" },
         { id: 7, name: "KACANG ARAB", stock: 0, img: "https://i.postimg.cc/sDgV1n09/16ad7cba-62a3-48d4-a52c-25fe2f379b5e.jpg" },
         { id: 8, name: "KACANG MADU", stock: 0, img: "https://i.postimg.cc/sDH3Wpk1/129f1f36-b98b-4f99-bdde-93c543eb32e8.jpg" }
+        { id: 9, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" }
+        { id: 10, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" }
+        { id: 11, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" }
     ];
 
     let cart = {};
@@ -153,26 +166,40 @@
     }
 
     function render() {
-        const grid = document.getElementById('container-snack');
-        grid.innerHTML = '';
-        snackData.forEach(s => {
-            const empty = s.stock <= 0;
-            grid.innerHTML += `
-                <div class="card ${empty ? 'is-empty' : ''}">
-                    <div class="sold-out-overlay"><div class="sold-out-text">SOLD OUT</div></div>
-                    <img src="${s.img}">
-                    <div class="card-info">
-                        <div class="card-name">${s.name}</div>
-                        <div class="stock-tag">SISA: ${s.stock}</div>
-                        <div class="counter">
-                            <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty? 'disabled':''}>-</button>
+    const grid = document.getElementById('container-snack');
+    grid.innerHTML = '';
+    snackData.forEach(s => {
+        const isComingSoon = s.name.toUpperCase().includes("COMING SOON");
+        const empty = s.stock <= 0;
+        
+        // Header kartu (overlay sold out/soon)
+        let overlayText = "SOLD OUT";
+        if (isComingSoon) overlayText = "SOON";
+
+        grid.innerHTML += `
+            <div class="card ${empty ? 'is-empty' : ''}">
+                <div class="sold-out-overlay">
+                    <div class="sold-out-text">${overlayText}</div>
+                </div>
+                <img src="${s.img}">
+                <div class="card-info">
+                    <div class="card-name">${s.name}</div>
+                    
+                    ${isComingSoon ? 
+                        `<div style="font-size: 0.7em; color: #888; margin: 10px 0; font-weight: 800; letter-spacing: 1px;">
+                            PRAY FOR US! 🙏
+                         </div>` : 
+                        `<div class="stock-tag">SISA: ${s.stock}</div>
+                         <div class="counter">
+                            <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty ? 'disabled' : ''}>-</button>
                             <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
-                            <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty? 'disabled':''}>+</button>
-                        </div>
-                    </div>
-                </div>`;
-        });
-    }
+                            <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty ? 'disabled' : ''}>+</button>
+                         </div>`
+                    }
+                </div>
+            </div>`;
+    });
+}
 
     function changeQty(id, delta) {
         let q = cart[id] || 0;
