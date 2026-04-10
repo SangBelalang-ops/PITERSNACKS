@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERSNACKS.ID - PREMIUM QUALITY</title>
     <style>
-        :root { --primary: #f7941d; --glass: rgba(18, 18, 18, 0.9); --aba: #005a8d; --success: #27ae60; --danger: #e74c3c; }
+        :root { 
+    --primary: #00d4ff; /* Biru Neon Songkran */
+    --glass: rgba(10, 25, 41, 0.9); 
+    --aba: #005a8d; 
+    --success: #00f2ff; 
+    --danger: #ff4d4d; 
+}
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #000; color: white; text-align: center; padding-bottom: 50px; overflow-x: hidden; }
         
         /* EFEK HUJAN MAKARONI - DIBIKIN LEBIH NYATA */
@@ -23,11 +29,11 @@
         .logo-header { width: 280px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
         
         header p {
-            margin: 0; font-size: 0.85em; font-weight: 800; letter-spacing: 2px;
-            background: linear-gradient(to right, #f7941d 0%, #f7941d 40%, #ffffff 50%, #f7941d 60%, #f7941d 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            background-size: 200% auto; animation: slingKilat 3s infinite linear;
-        }
+    margin: 0; font-size: 0.85em; font-weight: 800; letter-spacing: 2px;
+    background: linear-gradient(to right, #00d4ff 0%, #00d4ff 40%, #ffffff 50%, #00d4ff 60%, #00d4ff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    background-size: 200% auto; animation: slingKilat 3s infinite linear;
+}
         @keyframes slingKilat { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; max-width: 1000px; margin: 0 auto; }
@@ -148,7 +154,7 @@ setInterval(createSnack, 120);
         { id: 8, name: "KACANG MADU", stock: 0, img: "https://i.postimg.cc/sDH3Wpk1/129f1f36-b98b-4f99-bdde-93c543eb32e8.jpg" },
         { id: 9, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" },
         { id: 10, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" },
-        { id: 11, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" },
+        { id: 11, name: "COMING SOON: ? ? ? ? ?", stock: 0, img: "https://i.postimg.cc/x1yD1PBH/e5f0873b-c76b-4312-88bc-3bd67981a550.gif" }
     ];
 
     let cart = {};
