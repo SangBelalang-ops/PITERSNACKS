@@ -18,16 +18,16 @@
         .is-empty .sold-out-overlay { display: flex; }
         .card-info { padding: 8px; }
         .card-name { font-size: 0.7em; font-weight: 800; color: var(--primary); height: 30px; text-transform: uppercase; }
-        .stock-tag { font-size: 0.6em; background: rgba(247,148,29,0.2); padding: 2px 5px; border-radius: 4px; }
+        .stock-tag { font-size: 0.6em; background: rgba(247,148,29,0.2); padding: 2px 5px; border-radius: 4px; display: inline-block; margin-bottom: 5px; }
         .counter { display: flex; justify-content: center; align-items: center; gap: 5px; margin-top: 8px; }
-        .btn-qty { background: none; border: 1px solid var(--primary); width: 25px; height: 25px; color: white; border-radius: 5px; }
-        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass); padding: 15px; display: none; justify-content: space-between; align-items: center; border-top: 2px solid var(--primary); z-index: 1000; }
-        .btn-order { background: var(--primary); color: black; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 900; }
+        .btn-qty { background: none; border: 1px solid var(--primary); width: 25px; height: 25px; color: white; border-radius: 5px; cursor: pointer; }
+        #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass); padding: 15px; display: none; justify-content: space-between; align-items: center; border-top: 2px solid var(--primary); z-index: 1000; backdrop-filter: blur(5px); }
+        .btn-order { background: var(--primary); color: black; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 900; cursor: pointer; }
         #payment-area { display:none; padding: 30px 10px; background: #000; border-top: 2px solid var(--primary); }
-        .input-nama { width: 80%; padding: 12px; border-radius: 8px; border: 1px solid var(--primary); background: none; color: white; margin-bottom: 15px; }
+        .input-nama { width: 80%; padding: 12px; border-radius: 8px; border: 1px solid var(--primary); background: none; color: white; margin-bottom: 15px; text-align: center; }
         .qr-box { display: none; margin: 15px 0; }
-        .qr-box img { width: 200px; border: 3px solid white; }
-        .final-btn { background: var(--success); color: white; padding: 15px; border: none; border-radius: 30px; font-weight: 900; width: 80%; }
+        .qr-box img { width: 200px; border: 3px solid white; border-radius: 10px; }
+        .final-btn { background: var(--success); color: white; padding: 15px; border: none; border-radius: 30px; font-weight: 900; width: 80%; cursor: pointer; }
         @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
@@ -38,7 +38,7 @@
     <p style="color:var(--primary); font-weight:800;">PREMIUM QUALITY • $3.00</p>
 </header>
 
-<div id="loading" style="padding: 50px; color: var(--primary);">MENYIAPKAN SNACK...</div>
+<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800;">MENYIAPKAN SNACK...</div>
 <div class="grid" id="container-snack"></div>
 
 <div id="total-bar">
@@ -50,18 +50,18 @@
 </div>
 
 <div id="payment-area">
-    <input type="text" id="nama-pembeli" class="input-nama" placeholder="NAMA ANDA">
+    <input type="text" id="nama-pembeli" class="input-nama" placeholder="MASUKKAN NAMA ANDA">
     <div>
-        <button onclick="showQR('usd')" style="padding:8px; color:white; background:none; border:1px solid var(--primary);">USD</button>
-        <button onclick="showQR('riel')" style="padding:8px; color:white; background:none; border:1px solid var(--primary);">RIEL</button>
+        <button onclick="showQR('usd')" style="padding:8px; color:white; background:none; border:1px solid var(--primary); border-radius: 5px; margin: 5px;">USD</button>
+        <button onclick="showQR('riel')" style="padding:8px; color:white; background:none; border:1px solid var(--primary); border-radius: 5px; margin: 5px;">RIEL</button>
     </div>
     <div id="qr-usd" class="qr-box"><img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg"></div>
     <div id="qr-riel" class="qr-box"><img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg"></div>
-    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn" style="margin-top:15px;">KIRIM PESANAN</button>
+    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn" style="margin-top:15px;">KONFIRMASI PEMBAYARAN</button>
 </div>
 
 <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzSEZRcBGjY6TOMCqWgubq-L_qRPY4DxSVs9z92Wie_KOAMIsU5TAfoedRNbdTsgBRw/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzVZSuOqLyYR12NbRGsxV-YiXzGopKEpz-iNyNqnJ5zOoMVDxYCZu46fAq7Hny3vwc/exec";
 
     function createSnack() {
         const icons = ['🥨', '🍪', '🍬', '🥜', '🍿'];
@@ -96,7 +96,10 @@
             snackData.forEach(s => { if(sheetStok[s.name] !== undefined) s.stock = sheetStok[s.name]; });
             document.getElementById('loading').style.display = 'none';
             render();
-        } catch(e) { setTimeout(init, 2000); }
+        } catch(e) { 
+            console.error(e);
+            setTimeout(init, 3000); 
+        }
     }
 
     function render() {
@@ -105,15 +108,15 @@
         snackData.forEach(s => {
             const empty = s.stock <= 0;
             grid.innerHTML += `<div class="card ${empty ? 'is-empty' : ''}">
-                <div class="sold-out-overlay"><div style="background:red;padding:5px;">SOLD OUT</div></div>
+                <div class="sold-out-overlay"><div style="background:red;padding:5px;font-weight:900;transform:rotate(-15deg);border:2px solid white;">SOLD OUT</div></div>
                 <img src="${s.img}">
                 <div class="card-info">
                     <div class="card-name">${s.name}</div>
                     <div class="stock-tag">SISA: ${s.stock}</div>
                     <div class="counter">
-                        <button class="btn-qty" onclick="changeQty(${s.id},-1)">-</button>
-                        <span id="qty-${s.id}">0</span>
-                        <button class="btn-qty" onclick="changeQty(${s.id},1)">+</button>
+                        <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty?'disabled':''}>-</button>
+                        <span id="qty-${s.id}" style="font-weight:900;min-width:15px;">0</span>
+                        <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty?'disabled':''}>+</button>
                     </div>
                 </div>
             </div>`;
@@ -131,27 +134,55 @@
 
     function updateTotal() {
         let total = 0; let list = [];
-        Object.keys(cart).forEach(id => { if(cart[id]>0){ total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }});
+        Object.keys(cart).forEach(id => { 
+            if(cart[id]>0){ 
+                total += cart[id]*3; 
+                list.push(`${cart[id]}x ${snackData[id].name}`); 
+            }
+        });
         document.getElementById('total-bar').style.display = total > 0 ? 'flex' : 'none';
         document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
         document.getElementById('summary').innerText = list.join(", ");
     }
 
-    function openPayment() { document.getElementById('payment-area').style.display='block'; window.scrollTo(0, document.body.scrollHeight); }
-    function showQR(t) { document.getElementById('qr-usd').style.display = t=='usd'?'block':'none'; document.getElementById('qr-riel').style.display = t=='riel'?'block':'none'; }
+    function openPayment() { 
+        document.getElementById('payment-area').style.display='block'; 
+        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); 
+    }
+
+    function showQR(t) { 
+        document.getElementById('qr-usd').style.display = t=='usd'?'block':'none'; 
+        document.getElementById('qr-riel').style.display = t=='riel'?'block':'none'; 
+    }
 
     function sendToSpreadsheet() {
         const nama = document.getElementById('nama-pembeli').value;
-        if(!nama) return alert("NAMA?");
+        if(!nama) return alert("Siapa Nama Anda?");
+        
         let list = []; let total = 0;
-        Object.keys(cart).forEach(id => { if(cart[id]>0){ total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }});
+        Object.keys(cart).forEach(id => { 
+            if(cart[id]>0){ 
+                total += cart[id]*3; 
+                list.push(`${cart[id]}x ${snackData[id].name}`); 
+            }
+        });
+
         const btn = document.getElementById('submit-btn');
-        btn.innerText = "KIRIM..."; btn.disabled = true;
+        btn.innerText = "MENGIRIM..."; btn.disabled = true;
+
         const params = new URLSearchParams();
         params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
         params.append('total', "$" + total.toFixed(2));
+
         fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
-        .then(() => { alert("SUKSES!"); location.reload(); });
+        .then(() => { 
+            alert("PESANAN BERHASIL TERKIRIM!"); 
+            location.reload(); 
+        })
+        .catch(() => {
+            alert("Terjadi kesalahan, tapi coba cek spreadsheet lo!");
+            location.reload();
+        });
     }
     init();
 </script>
