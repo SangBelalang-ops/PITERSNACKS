@@ -3,72 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS.ID - SONGKRAN SPECIAL</title>
+    <title>TERSNACKS.ID - SONGKRAN EDITION</title>
     <style>
-        :root { --cyan: #00ffff; --red: #ff4d4d; --dark: #050505; --glass: rgba(15, 15, 15, 0.9); }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--dark); color: white; text-align: center; padding-bottom: 80px; overflow-x: hidden; }
+        :root { 
+            --cyan: #00ffff; 
+            --red: #ff0000; 
+            --dark: #050505; 
+            --glass: rgba(10, 10, 10, 0.9);
+        }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            background: var(--dark); 
+            color: white; 
+            text-align: center; 
+            padding-bottom: 80px; 
+            overflow-x: hidden; 
+        }
 
-        /* SONGKRAN WATER SPLASH EFFECT */
-        .splash { position: fixed; pointer-events: none; z-index: 999; border-radius: 50%; background: var(--cyan); opacity: 0.7; animation: splashAnim 0.8s ease-out forwards; }
-        @keyframes splashAnim { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(4); opacity: 0; } }
+        /* EFEK CIPRATAN AIR SONGKRAN */
+        .splash {
+            position: fixed; pointer-events: none; z-index: 999;
+            border-radius: 50%; background: var(--cyan); opacity: 0.7;
+            animation: splashAnim 0.8s ease-out forwards;
+        }
+        @keyframes splashAnim {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
 
-        header { padding: 40px 20px; background: linear-gradient(180deg, rgba(0,255,255,0.15) 0%, transparent 100%); border-bottom: 2px solid var(--cyan); }
-        .logo-header { width: 220px; filter: drop-shadow(0 0 15px var(--cyan)); margin-bottom: 10px; }
-        .glitch { font-size: 2.2em; font-weight: 900; color: var(--cyan); text-shadow: 3px 3px var(--red); letter-spacing: 3px; margin: 0; }
+        header { 
+            padding: 50px 20px; 
+            background: linear-gradient(180deg, rgba(0,255,255,0.15), transparent);
+            border-bottom: 2px solid var(--cyan);
+            position: relative;
+        }
+        .logo-header { 
+            width: 250px; 
+            filter: drop-shadow(0 0 15px var(--cyan)); 
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; max-width: 800px; margin: 0 auto; }
-        .card { background: var(--glass); border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,255,255,0.2); position: relative; transition: 0.3s; }
-        .card:hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,255,0.3); transform: translateY(-5px); }
+        .songkran-title {
+            font-size: 2.2em; font-weight: 900; color: var(--cyan);
+            text-shadow: 3px 3px var(--red); letter-spacing: 4px; margin: 10px 0;
+        }
+
+        /* GRID SYSTEM */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; padding: 20px; 
+            max-width: 800px; margin: 0 auto; 
+        }
+        
+        .card { 
+            background: var(--glass); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid rgba(0, 255, 255, 0.2); 
+            position: relative; 
+            transition: 0.3s;
+        }
+        .card:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 0 20px rgba(0,255,255,0.3); }
         .card img { width: 100%; height: 140px; object-fit: cover; }
-        
-        .badge { position: absolute; top: 10px; left: 10px; background: var(--red); color: white; padding: 4px 10px; font-size: 0.6em; font-weight: 900; border-radius: 5px; box-shadow: 0 0 10px var(--red); }
-        .card-name { font-size: 0.8em; font-weight: 800; color: var(--cyan); padding: 10px 5px; text-transform: uppercase; }
-        .stock-tag { font-size: 0.65em; background: rgba(0,255,255,0.1); color: #fff; padding: 3px 10px; border-radius: 50px; border: 1px solid var(--cyan); display: inline-block; margin-bottom: 10px; }
 
+        /* BADGE COMING SOON */
+        .badge-new {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--red); color: white; padding: 5px 12px;
+            font-size: 0.6em; font-weight: 900; border-radius: 50px;
+            box-shadow: 0 0 10px var(--red); z-index: 10;
+        }
+
+        .card-name { font-weight: 800; color: var(--cyan); padding: 12px 5px; font-size: 0.85em; text-transform: uppercase; }
+        .stock-tag { font-size: 0.65em; background: rgba(0,255,255,0.1); padding: 4px 10px; border-radius: 50px; border: 1px solid var(--cyan); display: inline-block; margin-bottom: 10px; }
+
+        /* COUNTER */
         .counter { display: flex; justify-content: center; align-items: center; gap: 12px; padding-bottom: 15px; }
-        .btn-qty { background: transparent; border: 2px solid var(--cyan); width: 32px; height: 32px; border-radius: 50%; color: var(--cyan); font-weight: 900; cursor: pointer; }
+        .btn-qty { 
+            background: transparent; border: 2px solid var(--cyan); color: var(--cyan);
+            width: 35px; height: 35px; border-radius: 50%; font-weight: 900; cursor: pointer;
+        }
         .btn-qty:active { background: var(--cyan); color: black; }
-        .btn-qty:disabled { opacity: 0.2; border-color: #555; }
+        .btn-qty:disabled { opacity: 0.1; border-color: #444; }
 
-        #total-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--cyan); color: black; padding: 15px 25px; border-radius: 50px; display: none; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 0 25px rgba(0,255,255,0.5); }
-        
-        #payment-area { display: none; padding: 40px 20px; background: #000; border-top: 2px solid var(--cyan); }
-        .input-nama { width: 85%; padding: 15px; border-radius: 12px; border: 2px solid var(--cyan); background: transparent; color: white; text-align: center; font-weight: 800; font-size: 1em; margin-bottom: 20px; }
-        .final-btn { background: var(--cyan); color: black; padding: 18px; border: none; border-radius: 50px; font-weight: 900; width: 90%; cursor: pointer; font-size: 1.1em; }
+        /* FLOATING TOTAL BAR */
+        #total-bar { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 420px; background: var(--cyan); color: black; 
+            padding: 15px 25px; border-radius: 50px; display: none; 
+            justify-content: space-between; align-items: center; z-index: 1000;
+            box-shadow: 0 0 30px rgba(0,255,255,0.4);
+        }
+        .btn-order-now { background: black; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 900; cursor: pointer; }
 
-        .sold-out { filter: grayscale(1); opacity: 0.5; }
-        .sold-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); background: var(--red); color: white; padding: 5px 15px; font-weight: 900; border: 2px solid white; z-index: 10; font-size: 0.8em; }
+        /* PAYMENT AREA */
+        #payment-area { display: none; padding: 40px 20px; background: #000; border-top: 3px solid var(--cyan); margin-top: 30px; }
+        .input-custom { 
+            width: 85%; padding: 18px; background: transparent; 
+            border: 2px solid var(--cyan); border-radius: 15px; color: white;
+            font-weight: 800; text-align: center; margin-bottom: 25px; font-size: 1em;
+        }
+        .final-btn { background: var(--cyan); color: black; padding: 20px; border: none; border-radius: 50px; font-weight: 900; width: 90%; cursor: pointer; font-size: 1.1em; }
+
+        .sold-out { filter: grayscale(1); opacity: 0.6; }
+        .sold-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); background: var(--red); color: white; padding: 5px 15px; font-weight: 900; border: 2px solid white; font-size: 0.8em; }
+
+        @media (max-width: 500px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
     </style>
 </head>
-<body onclick="spawnSplash(event)">
+<body onclick="createSplash(event)">
 
 <header>
     <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header">
-    <h1 class="glitch">SONGKRAN</h1>
-    <p style="color: var(--cyan); font-weight: 700; letter-spacing: 2px;">SPECIAL PROMO • $3.00</p>
+    <div class="songkran-title">SONGKRAN</div>
+    <p style="color: var(--cyan); font-weight: 700; letter-spacing: 2px;">PREMIUM QUALITY • $3.00</p>
 </header>
 
-<div id="loading" style="padding: 50px; color: var(--cyan); font-weight: 800;">SEDANG MENGISI AIR...</div>
+<div id="loading" style="padding: 100px; color: var(--cyan); font-weight: 800;">MENYIAPKAN SNACK BASAH...</div>
 <div class="grid" id="container-snack"></div>
 
 <div id="total-bar">
-    <div id="display-total" style="font-weight: 900; font-size: 1.4em;">$0.00</div>
-    <button onclick="openPayment()" style="background:black; color:white; border:none; padding:10px 20px; border-radius:30px; font-weight:900; cursor:pointer;">ORDER NOW</button>
+    <div style="text-align:left">
+        <div id="display-total" style="font-weight: 900; font-size: 1.4em;">$0.00</div>
+    </div>
+    <button class="btn-order-now" onclick="openPayment()">ORDER NOW</button>
 </div>
 
 <div id="payment-area">
-    <h2 style="color: var(--cyan); font-weight: 900;">SIAP BASAH-BASAHAN?</h2>
-    <input type="text" id="nama-pembeli" class="input-nama" placeholder="NAMA BOSKU?">
-    <div style="margin-bottom: 25px;">
-        <img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg" style="width: 220px; border: 4px solid var(--cyan); border-radius: 15px;">
+    <h2 style="color: var(--cyan); font-weight: 900; letter-spacing: 2px;">DATA PEMBELI</h2>
+    <input type="text" id="nama-pembeli" class="input-custom" placeholder="SIAPA NAMA ANDA?">
+    <div style="margin: 20px 0;">
+        <img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg" style="width: 220px; border: 5px solid var(--cyan); border-radius: 20px;">
     </div>
-    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI PESANAN</button>
+    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI & KIRIM</button>
 </div>
 
 <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxZiA-xrXnsAnx4GIUolADVJfKR0HG6cSnZ-Jy1hGi5pKKTxdpp2hvvjirx4MIECyOX/exec";
+    // MASUKKAN LINK APPS SCRIPT LO DI SINI
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwhUXfi13J6KCnDp4l9-WcpRyMGNJSD8GXWROqE1b_1voh_5kAoLBOPYVsoxXiLbC27/exec";
 
-    function spawnSplash(e) {
+    function createSplash(e) {
         const s = document.createElement('div');
         s.className = 'splash';
         s.style.left = e.clientX + 'px';
@@ -110,14 +188,14 @@
             const isComing = s.name === "COMING SOON";
             grid.innerHTML += `
                 <div class="card ${isEmpty ? 'sold-out' : ''}">
-                    ${isEmpty ? '<div class="sold-text">HABIS!</div>' : ''}
-                    ${isComing ? '<div class="badge">HOT ITEM</div>' : ''}
+                    ${isEmpty ? '<div class="sold-label">HABIS</div>' : ''}
+                    ${isComing ? '<div class="badge-new">NEW</div>' : ''}
                     <img src="${s.img}">
                     <div class="card-name">${s.name}</div>
                     <div class="stock-tag">${isComing ? 'TERBATAS' : 'SISA: ' + s.stock}</div>
                     <div class="counter">
                         <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${isEmpty?'disabled':''}>-</button>
-                        <span id="qty-${s.id}" style="font-weight:900; width:20px;">0</span>
+                        <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
                         <button class="btn-qty" onclick="changeQty(${s.id},1)" ${isEmpty?'disabled':''}>+</button>
                     </div>
                 </div>`;
@@ -151,11 +229,14 @@
         
         let list = []; let total = 0;
         Object.keys(cart).forEach(id => { 
-            if(cart[id]>0){ total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }
+            if(cart[id]>0){ 
+                total += cart[id]*3; 
+                list.push(`${cart[id]}x ${snackData[id].name}`); 
+            }
         });
 
         const btn = document.getElementById('submit-btn');
-        btn.innerText = "SEDANG MENGIRIM..."; btn.disabled = true;
+        btn.innerText = "MENGIRIM..."; btn.disabled = true;
 
         const params = new URLSearchParams();
         params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
@@ -164,8 +245,7 @@
         fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
         .then(() => { 
             alert("MANTAP! Pesanan Berhasil Dicatat."); 
-            const waMsg = `Halo Admin! Saya ${nama} mau konfirmasi order TERSNACKS:\n${list.join("\n")}\nTotal: $${total.toFixed(2)}`;
-            window.location.href = `https://wa.me/6281234567890?text=${encodeURIComponent(waMsg)}`; // GANTI NO WA LU DISINI
+            location.reload(); 
         });
     }
 
