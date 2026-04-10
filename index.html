@@ -150,19 +150,33 @@
     let cart = {};
 
     async function init() {
+        const loading = document.getElementById('loading');
+        // JURUS ANTI-BLOKIR: Pake Proxy AllOrigins
+        const proxyURL = "https://api.allorigins.win/get?url=" + encodeURIComponent(scriptURL);
+
         try {
-            const res = await fetch(scriptURL);
-            const sheetStok = await res.json();
+            const res = await fetch(proxyURL);
+            const json = await res.json();
+            
+            // AllOrigins membungkus data asli di dalam properti .contents
+            const sheetStok = JSON.parse(json.contents);
+            
+            console.log("Data Berhasil Tembus:", sheetStok);
+
             snackData.forEach(s => { 
                 if(sheetStok[s.name] !== undefined) s.stock = sheetStok[s.name]; 
             });
-            document.getElementById('loading').style.display = 'none';
+            
+            loading.style.display = 'none';
             render();
         } catch(e) { 
-            console.error(e); 
+            console.error("Gagal sinkron:", e);
             // Tetap render meskipun fetch gagal agar tidak stuck loading
-            document.getElementById('loading').style.display = 'none';
-            render();
+            loading.innerHTML = "Koneksi Google Lemot, mencoba manual...";
+            setTimeout(() => {
+                loading.style.display = 'none';
+                render();
+            }, 2000);
         }
     }
 
