@@ -6,19 +6,17 @@
     <title>TERSNACKS.ID - PREMIUM QUALITY</title>
     <style>
         :root { 
-    --primary: #00d4ff; /* Biru Neon Songkran */
-    --glass: rgba(10, 25, 41, 0.9); 
-    --aba: #005a8d; 
-    --success: #00f2ff; 
-    --danger: #ff4d4d; 
-}
+            --primary: #00d4ff; 
+            --glass: rgba(10, 25, 41, 0.9); 
+            --aba: #005a8d; 
+            --success: #00f2ff; 
+            --danger: #ff4d4d; 
+        }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #000; color: white; text-align: center; padding-bottom: 50px; overflow-x: hidden; }
         
-        /* EFEK HUJAN MAKARONI - DIBIKIN LEBIH NYATA */
         .falling-snack {
             position: fixed; top: -50px; font-size: 28px; z-index: 100;
             user-select: none; pointer-events: none; animation: fall linear forwards;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8)); /* Biar putihnya terang */
             color: #fff;
         }
         @keyframes fall {
@@ -29,15 +27,15 @@
         .logo-header { width: 280px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
         
         header p {
-    margin: 0; font-size: 0.85em; font-weight: 800; letter-spacing: 2px;
-    background: linear-gradient(to right, #00d4ff 0%, #00d4ff 40%, #ffffff 50%, #00d4ff 60%, #00d4ff 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    background-size: 200% auto; animation: slingKilat 3s infinite linear;
-}
+            margin: 0; font-size: 0.85em; font-weight: 800; letter-spacing: 2px;
+            background: linear-gradient(to right, #00d4ff 0%, #00d4ff 40%, #ffffff 50%, #00d4ff 60%, #00d4ff 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            background-size: 200% auto; animation: slingKilat 3s infinite linear;
+        }
         @keyframes slingKilat { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; max-width: 1000px; margin: 0 auto; }
-        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(247,148,29,0.2); position: relative; }
+        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.2); position: relative; }
         .card img { width: 100%; height: 130px; object-fit: cover; }
         
         .sold-out-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 130px; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 5; }
@@ -49,9 +47,9 @@
         .card-name { font-size: 0.75em; font-weight: 800; color: var(--primary); height: 35px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
         
         .stock-tag { 
-            font-size: 0.65em; color: var(--primary); background: rgba(247, 148, 29, 0.2);
+            font-size: 0.65em; color: var(--primary); background: rgba(0, 212, 255, 0.1);
             border-radius: 5px; padding: 2px 8px; display: inline-block; margin-bottom: 10px;
-            font-weight: 900; border: 1px solid rgba(247, 148, 29, 0.4);
+            font-weight: 900; border: 1px solid rgba(0, 212, 255, 0.3);
         }
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -60,7 +58,7 @@
         .btn-qty:disabled { opacity: 0.1; }
 
         #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass); padding: 18px 25px; display: none; justify-content: space-between; align-items: center; border-top: 2px solid var(--primary); border-radius: 20px 20px 0 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .btn-order { background: var(--primary); color: black; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 0 15px rgba(247, 148, 29, 0.4); }
+        .btn-order { background: var(--primary); color: black; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
 
         #payment-area { position: relative; z-index: 10; display:none; padding: 40px 20px; background: rgba(0,0,0,0.95); border-top: 2px solid var(--primary); }
         .input-nama { width: 85%; padding: 15px; border-radius: 12px; border: 1px solid var(--primary); background: transparent; color: white; margin-bottom: 20px; text-align: center; font-weight: 800; }
@@ -68,7 +66,7 @@
         .qr-box img { width: 220px; border: 5px solid white; border-radius: 15px; }
         .final-btn { background: var(--success); color: white; padding: 18px; border: none; border-radius: 50px; font-weight: 900; width: 90%; cursor: pointer; }
 
-        footer { position: relative; z-index: 10; margin-top: 50px; padding: 40px 20px; border-top: 1px solid rgba(247, 148, 29, 0.2); background: rgba(10, 10, 10, 0.5); }
+        footer { position: relative; z-index: 10; margin-top: 50px; padding: 40px 20px; border-top: 1px solid rgba(0, 212, 255, 0.2); background: rgba(10, 25, 41, 0.5); }
 
         @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
@@ -117,30 +115,19 @@
 <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbwhUXfi13J6KCnDp4l9-WcpRyMGNJSD8GXWROqE1b_1voh_5kAoLBOPYVsoxXiLbC27/exec";
 
-    // KODE HUJAN EDISI SONGKRAN (PURE WATER FIGHT)
-function createSnack() {
-    // Isinya cuma pistol air, ember, dan air-airan
-    const icons = ['🔫', '💦', '💧', '🌊', '🪣', '🐳']; 
-    const spray = document.createElement('div');
-    spray.className = 'falling-snack';
-    
-    // Pilih emoji secara acak
-    spray.innerText = icons[Math.floor(Math.random() * icons.length)];
-    
-    // Pengaturan posisi dan kecepatan
-    spray.style.left = Math.random() * 100 + 'vw';
-    spray.style.animationDuration = Math.random() * 2 + 1.2 + 's'; // Dibuat lebih ngebut dikit
-    spray.style.opacity = Math.random() * 0.4 + 0.7; 
-    
-    // Cahaya biru neon biar seger di background hitam
-    spray.style.filter = "drop-shadow(0 0 10px #00aaff)"; 
-    
-    document.body.appendChild(spray);
-    setTimeout(() => spray.remove(), 3000);
-}
-
-// Kecepatan semburan air (120ms biar ramai)
-setInterval(createSnack, 120);
+    function createSnack() {
+        const icons = ['🔫', '💦', '💧', '🌊', '🪣', '🐳']; 
+        const spray = document.createElement('div');
+        spray.className = 'falling-snack';
+        spray.innerText = icons[Math.floor(Math.random() * icons.length)];
+        spray.style.left = Math.random() * 100 + 'vw';
+        spray.style.animationDuration = Math.random() * 2 + 1.2 + 's';
+        spray.style.opacity = Math.random() * 0.4 + 0.7; 
+        spray.style.filter = "drop-shadow(0 0 10px #00aaff)"; 
+        document.body.appendChild(spray);
+        setTimeout(() => spray.remove(), 3000);
+    }
+    setInterval(createSnack, 120);
 
     let snackData = [
         { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
@@ -168,49 +155,41 @@ setInterval(createSnack, 120);
             });
             document.getElementById('loading').style.display = 'none';
             render();
-        } catch(e) { setTimeout(init, 3000); }
+        } catch(e) { console.error(e); setTimeout(init, 3000); }
     }
 
     function render() {
-    const grid = document.getElementById('container-snack');
-    grid.innerHTML = '';
-    snackData.forEach(s => {
-        const isComingSoon = s.name.toUpperCase().includes("COMING SOON");
-        const empty = s.stock <= 0;
-        
-        // Header kartu (overlay sold out/soon)
-        let overlayText = "SOLD OUT";
-        if (isComingSoon) overlayText = "SOON";
+        const grid = document.getElementById('container-snack');
+        grid.innerHTML = '';
+        snackData.forEach(s => {
+            const isComingSoon = s.name.toUpperCase().includes("COMING SOON");
+            const empty = s.stock <= 0;
+            let overlayText = isComingSoon ? "SOON" : "SOLD OUT";
 
-        grid.innerHTML += `
-            <div class="card ${empty ? 'is-empty' : ''}">
-                <div class="sold-out-overlay">
-                    <div class="sold-out-text">${overlayText}</div>
-                </div>
-                <img src="${s.img}">
-                <div class="card-info">
-                    <div class="card-name">${s.name}</div>
-                    
-                    ${isComingSoon ? 
-                        `<div style="font-size: 0.7em; color: #888; margin: 10px 0; font-weight: 800; letter-spacing: 1px;">
-                            PRAY FOR US! 🙏
-                         </div>` : 
-                        `<div class="stock-tag">SISA: ${s.stock}</div>
-                         <div class="counter">
-                            <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty ? 'disabled' : ''}>-</button>
-                            <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
-                            <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty ? 'disabled' : ''}>+</button>
-                         </div>`
-                    }
-                </div>
-            </div>`;
-    });
-}
+            grid.innerHTML += `
+                <div class="card ${empty ? 'is-empty' : ''}">
+                    <div class="sold-out-overlay"><div class="sold-out-text">${overlayText}</div></div>
+                    <img src="${s.img}">
+                    <div class="card-info">
+                        <div class="card-name">${s.name}</div>
+                        ${isComingSoon ? 
+                            `<div style="font-size: 0.7em; color: #888; margin: 10px 0; font-weight: 800; letter-spacing: 1px;">PRAY FOR US! 🙏</div>` : 
+                            `<div class="stock-tag">SISA: ${s.stock}</div>
+                             <div class="counter">
+                                <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty ? 'disabled' : ''}>-</button>
+                                <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
+                                <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty ? 'disabled' : ''}>+</button>
+                             </div>`
+                        }
+                    </div>
+                </div>`;
+        });
+    }
 
     function changeQty(id, delta) {
-        let q = cart[id] || 0;
-        if(delta > 0 && q >= snackData[id].stock) return;
-        q += delta; if(q < 0) q = 0;
+        let q = (cart[id] || 0) + delta;
+        if(q < 0) q = 0;
+        if(delta > 0 && q > snackData[id].stock) return;
         cart[id] = q;
         document.getElementById(`qty-${id}`).innerText = q;
         updateTotal();
@@ -231,7 +210,7 @@ setInterval(createSnack, 120);
         window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); 
     }
 
-    function showQR(t, b) {
+    function showQR(t) {
         document.getElementById('qr-usd').style.display = t=='usd'?'block':'none';
         document.getElementById('qr-riel').style.display = t=='riel'?'block':'none';
     }
@@ -239,21 +218,16 @@ setInterval(createSnack, 120);
     function sendToSpreadsheet() {
         const nama = document.getElementById('nama-pembeli').value;
         if(!nama) return alert("Siapa Nama Bosku?");
-        
         let list = []; let total = 0;
         Object.keys(cart).forEach(id => { if(cart[id]>0){ total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }});
-
         const btn = document.getElementById('submit-btn');
         btn.innerText = "MENGIRIM..."; btn.disabled = true;
-
         const params = new URLSearchParams();
         params.append('pesanan', `Pembeli: ${nama} | Order: ${list.join(", ")}`);
         params.append('total', "$" + total.toFixed(2));
-
         fetch(`${scriptURL}?${params.toString()}`, { method: 'POST', mode: 'no-cors' })
         .then(() => { alert("MANTAP! Pesanan Berhasil."); location.reload(); });
     }
-
     init();
 </script>
 </body>
