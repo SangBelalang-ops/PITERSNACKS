@@ -8,21 +8,17 @@
         :root { 
             --primary: #00d4ff; 
             --glass: rgba(10, 25, 41, 0.9); 
-            --aba: #005a8d; 
             --success: #00f2ff; 
             --danger: #ff4d4d; 
         }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #000; color: white; text-align: center; padding-bottom: 50px; overflow-x: hidden; }
         
-        /* Animasi Air Songkran */
         .falling-snack {
             position: fixed; top: -50px; font-size: 28px; z-index: 100;
             user-select: none; pointer-events: none; animation: fall linear forwards;
             color: #fff;
         }
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
         header { position: relative; z-index: 10; padding: 45px 10px; background: var(--glass); border-bottom: 2px solid var(--primary); }
         .logo-header { width: 280px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
@@ -36,10 +32,9 @@
         @keyframes slingKilat { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; max-width: 1000px; margin: 0 auto; }
-        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.2); position: relative; transition: 0.3s; }
+        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.2); position: relative; }
         .card img { width: 100%; height: 130px; object-fit: cover; }
         
-        /* Overlay Sold Out */
         .sold-out-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 130px; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 5; }
         .sold-out-text { color: white; background: var(--danger); padding: 5px 10px; font-weight: 900; transform: rotate(-15deg); border: 2px solid white; font-size: 0.7em; }
         .is-empty .sold-out-overlay { display: flex; }
@@ -56,20 +51,16 @@
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-qty { background: rgba(255,255,255,0.1); border: 1px solid var(--primary); width: 30px; height: 30px; border-radius: 8px; color: white; cursor: pointer; transition: 0.2s; }
-        .btn-qty:active { background: var(--primary); color: black; }
-        .btn-qty:disabled { opacity: 0.1; cursor: not-allowed; }
+        .btn-qty:disabled { opacity: 0.1; }
 
-        /* Floating Bar Total */
         #total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass); padding: 18px 25px; display: none; justify-content: space-between; align-items: center; border-top: 2px solid var(--primary); border-radius: 20px 20px 0 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .btn-order { background: var(--primary); color: black; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+        .btn-order { background: var(--primary); color: black; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-        /* Area Pembayaran */
         #payment-area { position: relative; z-index: 10; display:none; padding: 40px 20px; background: rgba(0,0,0,0.95); border-top: 2px solid var(--primary); }
-        .input-nama { width: 85%; padding: 15px; border-radius: 12px; border: 1px solid var(--primary); background: transparent; color: white; margin-bottom: 20px; text-align: center; font-weight: 800; font-size: 1em; }
+        .input-nama { width: 85%; padding: 15px; border-radius: 12px; border: 1px solid var(--primary); background: transparent; color: white; margin-bottom: 20px; text-align: center; font-weight: 800; }
         .qr-box { display: none; margin: 25px 0; }
         .qr-box img { width: 220px; border: 5px solid white; border-radius: 15px; }
-        .final-btn { background: var(--success); color: black; padding: 18px; border: none; border-radius: 50px; font-weight: 900; width: 90%; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
-        .final-btn:disabled { background: #555; color: #888; }
+        .final-btn { background: var(--success); color: #000; padding: 18px; border: none; border-radius: 50px; font-weight: 900; width: 90%; cursor: pointer; }
 
         footer { position: relative; z-index: 10; margin-top: 50px; padding: 40px 20px; border-top: 1px solid rgba(0, 212, 255, 0.2); background: rgba(10, 25, 41, 0.5); }
 
@@ -80,59 +71,42 @@
 
 <header>
     <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header">
-    <h2 style="margin:0; font-size: 1.4em; font-weight: 900; letter-spacing: 1px;">TERSNACKS.ID</h2>
+    <h2 style="margin:0; font-size: 1.4em; font-weight: 900;">TERSNACKS.ID</h2>
     <p>PREMIUM QUALITY • $3.00</p>
 </header>
 
-<div id="loading" style="padding: 100px 20px; color: var(--primary); font-weight: 800; letter-spacing: 2px; font-size: 1.2em;">
-    <div style="margin-bottom: 10px;">💦 💦 💦</div>
-    SEDANG MEMUAT STOCK...
-</div>
-
+<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800; letter-spacing: 2px;">SYNCING STOCK...</div>
 <div class="grid" id="container-snack"></div>
 
 <div id="total-bar">
     <div style="text-align:left">
-        <div id="summary" style="font-size: 0.65em; color: #ccc; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+        <div id="summary" style="font-size: 0.65em; color: #ccc;"></div>
         <div id="display-total" style="font-weight: 900; color: var(--primary); font-size: 1.4em;">$0.00</div>
     </div>
     <button class="btn-order" onclick="openPayment()">ORDER SEKARANG</button>
 </div>
 
 <div id="payment-area">
-    <h3 style="color: var(--primary); font-weight: 900; letter-spacing: 2px;">DATA PEMBELI</h3>
+    <h3 style="color: var(--primary); font-weight: 900;">DATA PEMBELI</h3>
     <input type="text" id="nama-pembeli" class="input-nama" placeholder="SIAPA NAMA ANDA?">
-    
     <div style="margin: 20px 0;">
-        <p style="font-size: 0.8em; color: #888; margin-bottom: 15px;">PILIH METODE PEMBAYARAN:</p>
         <button onclick="showQR('usd')" style="padding:10px 20px; border-radius:10px; border:1px solid var(--primary); background:none; color:white; cursor:pointer; margin: 5px; font-weight: 800;">USD ($)</button>
         <button onclick="showQR('riel')" style="padding:10px 20px; border-radius:10px; border:1px solid var(--primary); background:none; color:white; cursor:pointer; margin: 5px; font-weight: 800;">RIEL (៛)</button>
     </div>
-
-    <div id="qr-usd" class="qr-box">
-        <p style="font-size: 0.7em; color: var(--primary);">SCAN ABA USD</p>
-        <img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg">
-    </div>
-    <div id="qr-riel" class="qr-box">
-        <p style="font-size: 0.7em; color: var(--primary);">SCAN ABA RIEL</p>
-        <img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg">
-    </div>
-
+    <div id="qr-usd" class="qr-box"><img src="https://i.postimg.cc/nrqkP0h8/aba-riel.jpg"></div>
+    <div id="qr-riel" class="qr-box"><img src="https://i.postimg.cc/vZZrrQfY/riel-aba-asli.jpg"></div>
     <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI & KIRIM</button>
 </div>
 
 <footer>
     <h3 style="color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; font-weight: 900; font-size: 1em;">THANK YOU FOR SHOPPING!</h3>
-    <div style="margin-top: 20px; opacity: 0.3; font-size: 0.55em; letter-spacing: 5px;">
-        TERSNACKS.ID • 2026
-    </div>
+    <div style="margin-top: 20px; opacity: 0.3; font-size: 0.55em; letter-spacing: 5px;">TERSNACKS.ID • 2026</div>
 </footer>
 
 <script>
-    // 1. GANTI LINK EXEC LO DI SINI
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxBhW80smnGE9_RIj206zRJr2bdLM31RgMp5seLC0Q/dev";
+    // GANTI LINK DI BAWAH INI DENGAN LINK /exec TERBARU LO
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyZ0TS3iI0vzL40xNvkd21GbjMV2fkuAvVdEZyZRmIUmwN5Q8jIjaWoXeUyb-s_NKGo/exec";
 
-    // Efek Animasi Air
     function createSnack() {
         const icons = ['🔫', '💦', '💧', '🌊']; 
         const spray = document.createElement('div');
@@ -145,7 +119,6 @@
     }
     setInterval(createSnack, 150);
 
-    // Data Snack (Sesuaikan Nama dengan Kolom A di Sheets)
     let snackData = [
         { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
         { id: 1, name: "KETAWA", stock: 0, img: "https://i.postimg.cc/ncFLBVMD/b95988fe-979d-48c6-891c-900e8f3e42f1.jpg" },
@@ -160,37 +133,21 @@
 
     let cart = {};
 
-    // 2. AMBIL DATA DARI GOOGLE (JSONP - ANTI BLOKIR)
     function init() {
-        const loading = document.getElementById('loading');
         const script = document.createElement('script');
         script.src = `${scriptURL}?callback=handleData`;
         document.body.appendChild(script);
-        
-        // Safety timeout
-        setTimeout(() => {
-            if(loading.style.display !== 'none') {
-                loading.innerHTML = "Koneksi Google Lambat. Silahkan refresh...";
-            }
-        }, 8000);
     }
 
-    // Fungsi handle data yang masuk dari JSONP
     function handleData(sheetStok) {
-        console.log("Stok diterima:", sheetStok);
         const loading = document.getElementById('loading');
-        
         snackData.forEach(s => { 
-            if(sheetStok[s.name] !== undefined) {
-                s.stock = parseInt(sheetStok[s.name]); 
-            }
+            if(sheetStok[s.name] !== undefined) s.stock = parseInt(sheetStok[s.name]); 
         });
-        
         if(loading) loading.style.display = 'none';
         render();
     }
 
-    // Tampilkan List Snack ke HTML
     function render() {
         const grid = document.getElementById('container-snack');
         grid.innerHTML = '';
@@ -205,7 +162,7 @@
                         <div class="stock-tag">SISA: ${s.stock}</div>
                         <div class="counter">
                             <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${empty ? 'disabled' : ''}>-</button>
-                            <span id="qty-${s.id}" style="font-weight:900; min-width:20px; color:var(--primary);">0</span>
+                            <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
                             <button class="btn-qty" onclick="changeQty(${s.id},1)" ${empty ? 'disabled' : ''}>+</button>
                         </div>
                     </div>
@@ -213,25 +170,19 @@
         });
     }
 
-    // Update Jumlah di Keranjang
     function changeQty(id, delta) {
         let q = (cart[id] || 0) + delta;
         if(q < 0) q = 0;
         if(delta > 0 && q > snackData[id].stock) return;
-        
         cart[id] = q;
         document.getElementById(`qty-${id}`).innerText = q;
         updateTotal();
     }
 
-    // Update Bar Total di Bawah
     function updateTotal() {
         let total = 0; let list = [];
         Object.keys(cart).forEach(id => {
-            if(cart[id] > 0) {
-                total += cart[id] * 3;
-                list.push(`${cart[id]}x ${snackData[id].name}`);
-            }
+            if(cart[id]>0) { total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }
         });
         document.getElementById('total-bar').style.display = total > 0 ? 'flex' : 'none';
         document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
@@ -248,46 +199,37 @@
         document.getElementById('qr-riel').style.display = t=='riel'?'block':'none';
     }
 
-    // 3. KIRIM PESANAN KE SHEET PENJUALAN
     function sendToSpreadsheet() {
-    const nama = document.getElementById('nama-pembeli').value;
-    if(!nama) return alert("NAMA PEMBELI HARUS DIISI!");
-    
-    let list = []; 
-    let total = 0;
-    
-    Object.keys(cart).forEach(id => { 
-        if(cart[id] > 0) {
-            total += cart[id] * 3;
-            list.push(`${cart[id]}x ${snackData[id].name}`);
-        }
-    });
-    
-    const btn = document.getElementById('submit-btn');
-    btn.innerText = "MENGIRIM..."; btn.disabled = true;
+        const nama = document.getElementById('nama-pembeli').value;
+        if(!nama) return alert("NAMA HARUS DIISI!");
+        
+        let list = []; let total = 0;
+        Object.keys(cart).forEach(id => { if(cart[id]>0){ total += cart[id]*3; list.push(`${cart[id]}x ${snackData[id].name}`); }});
+        
+        const btn = document.getElementById('submit-btn');
+        btn.innerText = "MENGIRIM..."; btn.disabled = true;
 
-    // Masukin data ke URLSearchParams biar Google nangkep 3 variabel beda
-    const params = new URLSearchParams();
-    params.append('nama', nama);         // Masuk ke Kolom B
-    params.append('pesanan', list.join(", ")); // Masuk ke Kolom C
-    params.append('total', "$" + total.toFixed(2)); // Masuk ke Kolom D
+        const params = new URLSearchParams();
+        params.append('nama', nama);
+        params.append('pesanan', list.join(", "));
+        params.append('total', "$" + total.toFixed(2));
 
-    fetch(`${scriptURL}?${params.toString()}`, { 
-        method: 'POST', 
-        mode: 'no-cors' 
-    })
-    .then(() => { 
-        alert("PESANAN BERHASIL MASUK!"); 
-        location.reload(); 
-    })
-    .catch(e => {
-        alert("Cek Sheet PENJUALAN lo, biasanya udah masuk kok.");
-        btn.disabled = false;
-        btn.innerText = "KONFIRMASI & KIRIM";
-    });
-}
+        // Menggunakan fetch dengan mode no-cors biar pasti jalan
+        fetch(`${scriptURL}?${params.toString()}`, { 
+            method: 'GET', 
+            mode: 'no-cors' 
+        })
+        .then(() => { 
+            alert("PESANAN BERHASIL! Stok akan otomatis diperbarui."); 
+            location.reload(); 
+        })
+        .catch(e => {
+            console.error(e);
+            alert("Selesai! Cek sheet penjualan lo.");
+            location.reload();
+        });
+    }
 
-    // Jalankan pas web dibuka
     init();
 </script>
 </body>
