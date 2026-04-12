@@ -10,6 +10,8 @@
             --glass: rgba(10, 25, 41, 0.9); 
             --success: #00f2ff; 
             --danger: #ff4d4d; 
+            --gold: #ffea00; /* Warna baru untuk Coming Soon */
+            --cs-glow: rgba(147, 51, 234, 0.3); /* Glow untuk slot CS */
         }
         body { 
             font-family: 'Segoe UI', sans-serif; 
@@ -17,14 +19,30 @@
             text-align: center; padding-bottom: 50px; overflow-x: hidden; 
         }
         
+        /* Animasi Air */
         .falling-snack {
             position: fixed; top: -50px; font-size: 28px; z-index: 100;
             user-select: none; pointer-events: none; animation: fall linear forwards;
         }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        header { position: relative; z-index: 10; padding: 45px 10px; background: var(--glass); border-bottom: 2px solid var(--primary); }
-        .logo-header { width: 280px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
+        header { 
+            position: relative; z-index: 10; padding: 45px 10px; 
+            background: var(--glass); border-bottom: 2px solid var(--primary); 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        /* Logo Neon Glowing - Nggak Hitam Lagi */
+        .logo-header { 
+            width: 280px; 
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px var(--primary)) drop-shadow(0 0 15px var(--primary));
+            animation: logoGlow 4s infinite alternate;
+        }
+        @keyframes logoGlow {
+            from { filter: drop-shadow(0 0 8px var(--primary)) drop-shadow(0 0 15px var(--primary)); }
+            to { filter: drop-shadow(0 0 12px var(--primary)) drop-shadow(0 0 25px var(--primary)); }
+        }
         
         /* Animasi Kilat Putih */
         header p {
@@ -36,13 +54,41 @@
         @keyframes slingKilat { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .grid { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; max-width: 1000px; margin: 0 auto; }
-        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.2); position: relative; }
+        
+        /* Card & Slot CS */
+        .card { 
+            background: var(--glass); border-radius: 15px; overflow: hidden; 
+            border: 1px solid rgba(0, 212, 255, 0.2); position: relative; 
+            transition: 0.3s;
+        }
+        .is-cs-card { 
+            border: 2px solid var(--cs-glow);
+            box-shadow: 0 0 15px var(--cs-glow);
+        }
+        
         .card img { width: 100%; height: 130px; object-fit: cover; }
         
-        .sold-out-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 130px; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 5; }
-        .sold-out-text { color: white; background: var(--danger); padding: 5px 10px; font-weight: 900; transform: rotate(-15deg); border: 2px solid white; font-size: 0.7em; }
+        /* Overlay Text (Sold Out & Coming Soon) */
+        .sold-out-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 130px; 
+            background: rgba(0,0,0,0.85); display: none; align-items: center; 
+            justify-content: center; z-index: 5; backdrop-filter: blur(2px);
+        }
         .is-empty .sold-out-overlay { display: flex; }
         .is-empty img { filter: grayscale(1); }
+
+        .overlay-text { 
+            color: white; padding: 5px 10px; font-weight: 900; 
+            transform: rotate(-15deg); border: 2px solid white; font-size: 0.7em; 
+        }
+        /* Styling Spesifik untuk Coming Soon */
+        .cs-text {
+            color: black; background: var(--gold); border-color: black;
+            box-shadow: 0 0 10px var(--gold);
+        }
+        .so-text {
+            color: white; background: var(--danger); border-color: white;
+        }
 
         .card-info { padding: 10px; }
         .card-name { font-size: 0.75em; font-weight: 800; color: var(--primary); height: 35px; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
@@ -76,7 +122,7 @@
     <p>PREMIUM QUALITY • $3.00</p>
 </header>
 
-<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800; letter-spacing: 2px;">SYNCING STOCK...</div>
+<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800; letter-spacing: 2px;">LOADING STOCK...</div>
 <div class="grid" id="container-snack"></div>
 
 <div id="total-bar">
@@ -129,6 +175,7 @@
         { id: 6, name: "LUMPIA", stock: 0, img: "https://i.postimg.cc/ZYcbbkj9/38611567-5f9f-4899-9d33-cffa77b5e469.jpg" },
         { id: 7, name: "KACANG ARAB", stock: 0, img: "https://i.postimg.cc/sDgV1n09/16ad7cba-62a3-48d4-a52c-25fe2f379b5e.jpg" },
         { id: 8, name: "KACANG MADU", stock: 0, img: "https://i.postimg.cc/sDH3Wpk1/129f1f36-b98b-4f99-bdde-93c543eb32e8.jpg" },
+        // Slot CS dengan visual baru
         { id: 9, name: "COMING SOON", stock: 0, isCS: true, img: "https://i.postimg.cc/T3Dj51gC/download.png" },
         { id: 10, name: "COMING SOON", stock: 0, isCS: true, img: "https://i.postimg.cc/T3Dj51gC/download.png" },
         { id: 11, name: "COMING SOON", stock: 0, isCS: true, img: "https://i.postimg.cc/T3Dj51gC/download.png" }
@@ -155,14 +202,17 @@
         grid.innerHTML = '';
         snackData.forEach(s => {
             const empty = !s.isCS && s.stock <= 0;
-            const styleCS = s.isCS ? 'opacity: 0.5; filter: grayscale(1);' : '';
+            const styleCSImg = s.isCS ? 'opacity: 0.5; filter: grayscale(1); blur(1px);' : '';
             
             grid.innerHTML += `
-                <div class="card ${empty ? 'is-empty' : ''}" style="${styleCS}">
+                <div class="card ${empty ? 'is-empty' : ''} ${s.isCS ? 'is-cs-card' : ''}">
                     <div class="sold-out-overlay">
-                        <div class="sold-out-text">${s.isCS ? 'COMING SOON' : 'SOLD OUT'}</div>
+                        ${s.isCS ? 
+                            `<div class="overlay-text cs-text">COMING SOON</div>` : 
+                            `<div class="overlay-text so-text">SOLD OUT</div>`
+                        }
                     </div>
-                    <img src="${s.img}">
+                    <img src="${s.img}" style="${styleCSImg}">
                     <div class="card-info">
                         <div class="card-name">${s.name}</div>
                         <div class="stock-tag">${s.isCS ? 'STAY TUNED' : 'SISA: ' + s.stock}</div>
