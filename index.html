@@ -156,21 +156,23 @@
             background: rgba(10, 25, 41, 0.6); 
         }
 
-        /* CSS KENTANG POJOK LAYAR GEDE */
-        .kentang-corner {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 150px;
-            z-index: 1001;
-            pointer-events: none;
-            filter: drop-shadow(0 0 10px var(--primary));
-        }
+     /* CSS KENTANG FIX ANTENG DI POJOK */
+.kentang-corner {
+    position: fixed;
+    bottom: 20px; /* Jarak dari bawah layar */
+    right: 20px;  /* Jarak dari kanan layar */
+    width: 150px;
+    z-index: 9999; /* Biar selalu di depan elemen apapun */
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px var(--primary));
+}
 
-        @media (max-width: 600px) { 
-            .grid { grid-template-columns: repeat(2, 1fr); } 
-            .kentang-corner { width: 90px; bottom: 80px; } 
-        }
+@media (max-width: 600px) { 
+    .kentang-corner { 
+        width: 100px; 
+        bottom: 90px; /* Naik dikit biar gak ketutup bar total pas muncul */
+    } 
+}
     </style>
 </head>
 <body>
