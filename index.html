@@ -1,148 +1,414 @@
-<!doctype html>
-<html ⚡ lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="utf-8">
-  <title>Warisan Nusantara - 5 Musim Snack</title>
-  <link rel="canonical" href="https://websitemu.com/amp-snack-seasons">
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-  <meta name="theme-color" content="#212121">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERSNACKS.ID - PREMIUM QUALITY</title>
+    <style>
+        :root { 
+            --primary: #00d4ff; 
+            --glass: rgba(10, 25, 41, 0.9); 
+            --success: #00f2ff; 
+            --danger: #ff0000;
+            --gold: #ffea00;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; background: #000; color: white; 
+            text-align: center; padding-bottom: 50px; overflow-x: hidden; 
+        }
 
-  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-  <script async src="https://cdn.ampproject.org/v0.js"></script>
-  
-  <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-  <script async custom-element="amp-animation" src="https://cdn.ampproject.org/v0/amp-animation-0.1.js"></script>
+        #rainCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-  <style amp-custom>
-    /* Reset & Font */
-    body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background: #111; color: #fff; margin: 0; overflow: hidden; }
-    
-    /* Layout Utama Atmosferik */
-    .hero { position: relative; height: 100vh; width: 100%; overflow: hidden; }
+        header { 
+            /* RELATIVE DISINI PENTING BUAT KENTANG */
+            position: relative; 
+            z-index: 10; padding: 45px 10px; 
+            background: var(--glass); border-bottom: 2px solid var(--primary); 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .logo-header { 
+            width: 280px; margin-bottom: 10px; 
+            filter: drop-shadow(0 0 10px var(--primary)); 
+        }
+        
+        header p { 
+            margin: 0; font-size: 0.85em; font-weight: 900; 
+            letter-spacing: 2px; color: var(--primary); 
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), #fff, var(--primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
 
-    /* Background Dinamis (Layer paling belakang) */
-    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #111; transition: background 0.8s ease; z-index: 1; }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
 
-    /* Partikel Atmosfer (SVG Overlay) */
-    .particle-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; opacity: 0.5; pointer-events: none; }
-    #particle-group circle { fill: rgba(255,255,255,0.8); } /* Default particle color */
+       /* FIX POSISI BIAR GAK OFFSIDE */
+.kentang-left {
+    position: absolute;
+    bottom: 0;      
+    left: 10px;    
+    width: 130px; 
+    z-index: 11;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px var(--primary));
+}
 
-    /* Header & Logo */
-    header { padding: 30px; position: absolute; top: 0; width: 100%; z-index: 10; text-align: center; }
-    .brand-logo { font-size: 1rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: #fff; opacity: 0.7; }
+.kentang-right {
+    position: absolute;
+    bottom: 0;     
+    right: 10px;  
+    width: 130px;   
+    z-index: 11;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px var(--primary));
+}
 
-    /* Carousel Gambar (The Atmosphere Star) */
-    .product-carousel { flex: 1; display: flex; align-items: center; justify-content: center; z-index: 3; height: 70vh; margin-top: 15vh; }
-    .slide-item { display: flex; align-items: center; justify-content: center; }
-    
-    /* Frame Gambar yang menonjol keluar */
-    .img-container { width: 85%; max-width: 380px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6)); }
-    
-    /* Animasi Text-Reveal saat slide aktif */
-    .product-details { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px; text-align: center; z-index: 5; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-    .rasa-name { font-size: 1.8rem; font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-    
-    /* Tombol CTA MANTAP (Sticky & Pulse) */
-    .cta-container { position: fixed; bottom: 0; width: 100%; padding: 20px; box-sizing: border-box; display: flex; justify-content: center; z-index: 100; }
-    .btn-buy { background: #fff; color: #000; padding: 20px 50px; border-radius: 50px; text-decoration: none; font-weight: 800; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 2px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); animation: pulse 2s infinite; }
+/* Biar pas di HP gak nutupin logo utama */
+@media (max-width: 600px) { 
+    .grid { grid-template-columns: repeat(2, 1fr); } 
+}
 
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
-      70% { transform: scale(1.04); box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-    }
-  </style>
+        .grid { 
+    display: grid; 
+    /* Ini bakal otomatis nambah baris baru kalau produk nambah */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 12px; 
+    padding: 15px; 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    position: relative; 
+    z-index: 10; 
+}
+        
+        .card { 
+            background: var(--glass); border-radius: 15px; overflow: hidden; 
+            border: 1px solid rgba(0, 212, 255, 0.2); position: relative; 
+            transition: 0.3s;
+        }
+        .card img { width: 100%; height: 130px; object-fit: cover; }
+        
+        .sold-out-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 130px; 
+            background: rgba(0,0,0,0.8); display: none; align-items: center; 
+            justify-content: center; z-index: 5;
+        }
+        .is-empty .sold-out-overlay { display: flex; }
+
+        .so-text { 
+            color: white; background: var(--danger); padding: 5px 15px; 
+            font-weight: 900; transform: rotate(-15deg); 
+            border: 2px solid white; font-size: 0.8em; 
+        }
+
+        .card-info { padding: 10px; }
+        .card-name { 
+            font-size: 0.75em; font-weight: 800; color: var(--primary); 
+            height: 35px; display: flex; align-items: center; 
+            justify-content: center; text-transform: uppercase; 
+        }
+        
+        .stock-tag { 
+            font-size: 0.65em; color: var(--primary); 
+            background: rgba(0, 212, 255, 0.1); border-radius: 5px; 
+            padding: 2px 8px; display: inline-block; 
+            margin-bottom: 10px; font-weight: 900;
+        }
+
+        .counter { display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-qty { 
+            background: rgba(255,255,255,0.1); border: 1px solid var(--primary); 
+            width: 30px; height: 30px; border-radius: 8px; color: white; cursor: pointer; 
+        }
+        
+        .btn-qty:disabled {
+            border-color: #444;
+            color: #444;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        #total-bar { 
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: var(--glass); padding: 18px 25px; display: none; 
+            justify-content: space-between; align-items: center; 
+            border-top: 2px solid var(--primary); z-index: 1000; 
+            backdrop-filter: blur(10px); 
+        }
+        .btn-order { 
+            background: var(--primary); color: black; border: none; 
+            padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; 
+        }
+
+        #payment-area { 
+            position: relative; z-index: 10; display:none; padding: 40px 20px; 
+            background: rgba(0,0,0,0.95); border-top: 2px solid var(--primary); 
+        }
+        .input-nama { 
+            width: 85%; padding: 15px; border-radius: 12px; 
+            border: 1px solid var(--primary); background: transparent; 
+            color: white; margin-bottom: 25px; text-align: center; font-weight: 800; 
+        }
+        
+        .pay-options { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .opt-btn { 
+            background: transparent; border: 2px solid var(--primary); color: white; 
+            padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 900; 
+        }
+        .opt-btn.active { background: var(--primary); color: black; }
+
+        .qr-display { display: none; justify-content: center; margin-bottom: 30px; }
+        .qr-box { background: white; padding: 12px; border-radius: 15px; width: 200px; }
+        .qr-box img { width: 100%; border-radius: 5px; }
+        .qr-label { color: black; font-size: 0.8em; font-weight: 900; margin-top: 8px; }
+
+        .final-btn { 
+            background: var(--success); color: #000; padding: 18px; 
+            border: none; border-radius: 50px; font-weight: 900; 
+            width: 90%; cursor: pointer; 
+        }
+
+        footer { 
+            position: relative; z-index: 10; margin-top: 60px; 
+            padding: 50px 20px; border-top: 1px solid rgba(0, 212, 255, 0.2); 
+            background: rgba(10, 25, 41, 0.6); 
+        }
+
+        @media (max-width: 600px) { 
+            .grid { grid-template-columns: repeat(2, 1fr); } 
+            .kentang-left { width: 90px; bottom: -15px; left: 10px; } 
+            .kentang-right { width: 90px; bottom: -15px; right: 10px; } 
+        }
+    </style>
 </head>
 <body>
 
-  <amp-state id="productData">
-    <script type="application/json">
-      {
-        "currentIndex": 0,
-        "items": [
-          { "name": "SUS KERING COKLAT", "bg": "#3E2723", "pCol": "rgba(62, 39, 35, 0.8)", "pScale": 1.2, "pSpeed": 1.5, "anim": "animChocoRain" },
-          { "name": "BALADO PADANG", "bg": "#831010", "pCol": "rgba(131, 16, 16, 0.9)", "pScale": 2.0, "pSpeed": 0.8, "anim": "animSpicyAutumn" },
-          { "name": "KUE BAWANG", "bg": "#B38F00", "pCol": "rgba(179, 143, 0, 0.7)", "pScale": 1.0, "pSpeed": 2.0, "anim": "animGoldenHour" },
-          { "name": "UNTIR UNTIR", "bg": "#5D4037", "pCol": "rgba(93, 64, 55, 0.8)", "pScale": 1.5, "pSpeed": 1.2, "anim": "animUntirFall" },
-          { "name": "BASRENG ORIGINAL", "bg": "#607D8B", "pCol": "rgba(96, 125, 139, 0.9)", "pScale": 0.8, "pSpeed": 0.5, "anim": "animBasrengBlizzard" }
-        ]
-      }
-    </script>
-  </amp-state>
+<canvas id="rainCanvas"></canvas>
 
-  <div class="hero">
+<header>
+    <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header">
+    <h2 style="margin:0; font-size: 1.4em; font-weight: 900;">TERSNACKS.ID</h2>
+    <p>PREMIUM QUALITY • $3.00</p>
     
-    <div class="hero-bg" [style]="'background:' + productData.items[productData.currentIndex].bg"></div>
+    <img src="https://i.postimg.cc/wMKm57LB/output-onlinegiftools.gif" class="kentang-left" alt="Kentang Payung Kiri">
+    <img src="https://i.postimg.cc/T1rdWcrD/output-onlinegiftools-(1).gif" class="kentang-right" alt="Kentang Outline Kanan">
+</header>
+
+<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800;">SYNCING STOCK...</div>
+<div class="grid" id="container-snack"></div>
+
+<div id="total-bar">
+    <div style="text-align:left">
+        <div id="summary" style="font-size: 0.65em; color: #ccc;"></div>
+        <div id="display-total" style="font-weight: 900; color: var(--primary); font-size: 1.4em;">$0.00</div>
+    </div>
+    <button class="btn-order" onclick="openPayment()">ORDER SEKARANG</button>
+</div>
+
+<div id="payment-area">
+    <h3 style="color: var(--primary); font-weight: 900;">DATA PEMBELI</h3>
+    <input type="text" id="nama-pembeli" class="input-nama" placeholder="SIAPA NAMA ANDA?">
     
-    <svg class="particle-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <g id="particle-group">
-            <circle cx="10" cy="-10" r="1.5" />
-            <circle cx="30" cy="-20" r="1.5" />
-            <circle cx="50" cy="-30" r="2.0" />
-            <circle cx="70" cy="-40" r="1.2" />
-            <circle cx="90" cy="-50" r="1.8" />
-            </g>
-    </svg>
-
-    <header>
-      <div class="brand-logo">WARISAN NUSANTARA</div>
-    </header>
-
-    <amp-carousel class="product-carousel" width="100" height="100" layout="responsive" type="slides" autoplay delay="4000"
-      on="slideChange:AMP.setState({ productData: {currentIndex: event.index}}); animGroup.start()">
-      
-      <div class="slide-item">
-        <div class="img-container">
-          <amp-img src="sus_coklat_transparant.png" width="400" height="400" layout="responsive"></amp-img>
-        </div>
-      </div>
-      <div class="slide-item">
-        <div class="img-container">
-          <amp-img src="balado_transparant.png" width="400" height="400" layout="responsive"></amp-img>
-        </div>
-      </div>
-      </amp-carousel>
-
-    <div class="product-details">
-      <h1 class="rasa-name" [text]="productData.items[productData.currentIndex].name">WARISAN</h1>
+    <p style="font-size: 0.8em; font-weight: 800; margin-bottom: 15px;">PILIH METODE PEMBAYARAN:</p>
+    <div class="pay-options">
+        <button class="opt-btn" id="btn-riel" onclick="showQR('riel')">RIEL</button>
+        <button class="opt-btn" id="btn-usd" onclick="showQR('usd')">USD</button>
     </div>
 
-  </div>
+    <div id="qr-riel" class="qr-display">
+        <div class="qr-box">
+            <img src="https://i.postimg.cc/xC8S9kSY/83ab8373-93bf-4620-9f16-ed523851faa0.jpg">
+            <div class="qr-label">BARCODE RIEL</div>
+        </div>
+    </div>
 
-  <div class="cta-container">
-    <a href="https://websitemu.com/keranjang" class="btn-buy">Beli Sekarang</a>
-  </div>
+    <div id="qr-usd" class="qr-display">
+        <div class="qr-box">
+            <img src="https://i.postimg.cc/PJGhKtBT/USD.jpg">
+            <div class="qr-label">BARCODE USD</div>
+        </div>
+    </div>
 
-  <amp-animation id="animGroup" layout="nodisplay">
-    <script type="application/json">
-        {
-          "duration": "1s",
-          "fill": "both",
-          "animations": [
-            {
-              "selector": "#particle-group circle",
-              "duration": "productData.items[productData.currentIndex].pSpeed",
-              "keyframes": [
-                { "transform": "translateY(0) scale(productData.items[productData.currentIndex].pScale)", "opacity": 0 },
-                { "transform": "translateY(110vh) scale(productData.items[productData.currentIndex].pScale)", "opacity": 1 }
-              ],
-              "fill": "both",
-              "iterations": "infinite",
-              "delay": "rand(0, 0.5s)"
-            },
-            {
-              "selector": "#particle-group circle",
-              "keyframes": [
-                { "fill": "productData.items[productData.currentIndex].pCol" },
-                { "fill": "productData.items[productData.currentIndex].pCol" }
-              ],
-              "fill": "both"
+    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI & KIRIM</button>
+</div>
+
+<footer>
+    <h3 style="color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; font-weight: 900; font-size: 1.1em;">THANK YOU FOR SHOPPING!</h3>
+    <div style="color: #fff; font-size: 0.9em; font-weight: 700; opacity: 0.8;">TERIMA KASIH SUDAH BERBELANJA DI TERSNACKS.ID</div>
+    <div style="margin-top: 25px; opacity: 0.3; font-size: 0.6em; letter-spacing: 5px; font-weight: 900;">TERSNACKS.ID • 2026</div>
+</footer>
+
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbykBwYZX2poPZx2-7gxtfnlrg0N5BW29lkdYOKeaelaGapyKi3NHQHUYDMoA1XTGTjO/exec";
+
+    const canvas = document.getElementById('rainCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let drops = [];
+    for (let i = 0; i < 120; i++) {
+        drops.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            len: Math.random() * 25 + 10,
+            speed: Math.random() * 12 + 6
+        });
+    }
+
+    function drawRain() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(0, 212, 255, 0.4)'; 
+        ctx.lineWidth = 1.5;
+        ctx.lineCap = 'round';
+
+        drops.forEach(d => {
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(d.x, d.y + d.len);
+            ctx.stroke();
+            d.y += d.speed;
+            if (d.y > canvas.height) {
+                d.y = -30;
+                d.x = Math.random() * canvas.width;
             }
-          ]
-        }
-    </script>
-  </amp-animation>
+        });
+        requestAnimationFrame(drawRain);
+    }
+    drawRain();
 
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    let snackData = [
+        { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
+        { id: 1, name: "KETAWA", stock: 0, img: "https://i.postimg.cc/ncFLBVMD/b95988fe-979d-48c6-891c-900e8f3e42f1.jpg" },
+        { id: 2, name: "KACANG TING TING", stock: 0, img: "https://i.postimg.cc/hP2trF7k/ab4902a9-b072-4159-8ebb-3fbf45c8fc0b.jpg" },
+        { id: 3, name: "KUE SUS KERING COKLAT", stock: 0, isCS: true, img: "https://i.postimg.cc/nLX3vcfH/5a308155-4a39-40bc-b5ff-6c53942c6446.jpg" },
+        { id: 4, name: "MAKARONI", stock: 0, img: "https://i.postimg.cc/9f7XCrgJ/9c04e078-ee93-4550-8310-851e9a34d691.jpg" },
+        { id: 5, name: "BASRENG PEDAS", stock: 0, img: "https://i.postimg.cc/gjYGV4z5/601de701-a9b5-4bbf-8aa6-87b171349a64.jpg" },
+        { id: 6, name: "LUMPIA", stock: 0, img: "https://i.postimg.cc/ZYcbbkj9/38611567-5f9f-4899-9d33-cffa77b5e469.jpg" },
+        { id: 7, name: "KACANG ARAB", stock: 0, img: "https://i.postimg.cc/sDgV1n09/16ad7cba-62a3-48d4-a52c-25fe2f379b5e.jpg" },
+        { id: 8, name: "KACANG TELUR", stock: 0, img: "https://i.postimg.cc/nLXR3qKF/a380402e-538b-431d-bc8e-5b332b2fbe5f.jpg" },
+        { id: 9, name: "KERIPIK BALADO PADANG", stock: 0, isCS: true, img: "https://i.postimg.cc/7LprzWcc/fc5d75bb-8868-4c74-80b9-289bc86bb0c1.jpg" },
+        { id: 10, name: "KUE BAWANG", stock: 0, isCS: true, img: "https://i.postimg.cc/W496fRjy/1904dff8-56e9-48b2-83c4-57a376284b27.jpg" },
+        { id: 11, name: "UNTIR UNTIR", stock: 0, isCS: true, img: "https://i.postimg.cc/3Rd6tFMx/09220392-ad87-478d-9fcf-0c67b1ba6cfb.jpg" }
+        { id: 12, name: "BASRENG ORIGINAL", stock: 0, isCS: true, img: "https://i.postimg.cc/sxBMf8kX/3428ff40-8068-4717-baf3-0bc8ffe5ef7f.jpg" } 
+    ];
+
+    let cart = {};
+
+    function init() {
+        const s = document.createElement('script');
+        s.src = `${scriptURL}?callback=handleData`;
+        document.body.appendChild(s);
+    }
+
+    function handleData(d) {
+        snackData.forEach(s => { 
+            if(!s.isCS && d[s.name.toUpperCase()] !== undefined) s.stock = parseInt(d[s.name.toUpperCase()]); 
+        });
+        document.getElementById('loading').style.display = 'none';
+        render();
+    }
+
+    function render() {
+        const grid = document.getElementById('container-snack');
+        grid.innerHTML = '';
+        snackData.forEach(s => {
+            const soldOut = !s.isCS && s.stock <= 0;
+            grid.innerHTML += `
+                <div class="card ${soldOut ? 'is-empty' : ''}">
+                    <div class="sold-out-overlay">
+                        <div class="so-text">${s.isCS ? 'COMING SOON' : 'SOLD OUT'}</div>
+                    </div>
+                    <img src="${s.img}">
+                    <div class="card-info">
+                        <div class="card-name">${s.name}</div>
+                        <div class="stock-tag">${s.isCS ? 'COMING SOON' : 'SISA: ' + s.stock}</div>
+                        <div class="counter" style="${s.isCS ? 'visibility:hidden' : ''}">
+                            <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${soldOut ? 'disabled' : ''}>-</button>
+                            <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
+                            <button class="btn-qty" onclick="changeQty(${s.id},1)" ${soldOut ? 'disabled' : ''}>+</button>
+                        </div>
+                    </div>
+                </div>`;
+        });
+    }
+
+    function changeQty(id, delta) {
+        let q = (cart[id] || 0) + delta;
+        if(q < 0 || q > (snackData[id].stock || 0)) return;
+        cart[id] = q;
+        document.getElementById(`qty-${id}`).innerText = q;
+        updateTotal();
+    }
+
+    function updateTotal() {
+        let total = 0; let list = [];
+        Object.keys(cart).forEach(id => {
+            if(cart[id] > 0) {
+                total += cart[id] * 3;
+                list.push(`${cart[id]}x ${snackData[id].name}`);
+            }
+        });
+        document.getElementById('total-bar').style.display = total > 0 ? 'flex' : 'none';
+        document.getElementById('display-total').innerText = "$" + total.toFixed(2);
+        document.getElementById('summary').innerText = list.join(", ");
+    }
+
+    function openPayment() { 
+        document.getElementById('payment-area').style.display='block'; 
+        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); 
+    }
+
+    function showQR(type) {
+        document.getElementById('qr-riel').style.display = 'none';
+        document.getElementById('qr-usd').style.display = 'none';
+        document.getElementById('btn-riel').classList.remove('active');
+        document.getElementById('btn-usd').classList.remove('active');
+        if(type === 'riel') {
+            document.getElementById('qr-riel').style.display = 'flex';
+            document.getElementById('btn-riel').classList.add('active');
+        } else {
+            document.getElementById('qr-usd').style.display = 'flex';
+            document.getElementById('btn-usd').classList.add('active');
+        }
+    }
+
+    function sendToSpreadsheet() {
+        const nama = document.getElementById('nama-pembeli').value;
+        if(!nama) return alert("NAMA HARUS DIISI!");
+        let list = []; let total = 0;
+        Object.keys(cart).forEach(id => { if(cart[id] > 0) { total += cart[id] * 3; list.push(`${cart[id]}x ${snackData[id].name}`); } });
+        if(list.length === 0) return alert("PILIH SNACK DULU!");
+        const btn = document.getElementById('submit-btn');
+        btn.innerText = "MENGIRIM..."; btn.disabled = true;
+        const params = new URLSearchParams();
+        params.append('nama', nama);
+        params.append('pesanan', list.join(", "));
+        params.append('total', "$" + total.toFixed(2));
+        fetch(`${scriptURL}?${params.toString()}`, { method: 'GET', mode: 'no-cors' })
+        .then(() => { alert("ORDER SENT!"); location.reload(); })
+        .catch(() => { location.reload(); });
+    }
+    init();
+</script>
 </body>
 </html>
