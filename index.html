@@ -336,28 +336,30 @@
     }
 
     function render() {
-        const grid = document.getElementById('container-snack');
-        grid.innerHTML = '';
-        snackData.forEach(s => {
-            const soldOut = !s.isCS && s.stock <= 0;
-            grid.innerHTML += `
-                <div class="card ${soldOut ? 'is-empty' : ''}">
-                    <div class="sold-out-overlay">
-                        <div class="so-text">${s.isCS ? 'COMING SOON' : 'SOLD OUT'}</div>
+    const grid = document.getElementById('container-snack');
+    grid.innerHTML = '';
+    snackData.forEach(s => {
+        // Cek stok: kalau 0 atau kurang muncul SOLD OUT
+        const soldOut = s.stock <= 0;
+
+        grid.innerHTML += `
+            <div class="card ${soldOut ? 'is-empty' : ''}">
+                <div class="sold-out-overlay">
+                    <div class="so-text">SOLD OUT</div>
+                </div>
+                <img src="${s.img}">
+                <div class="card-info">
+                    <div class="card-name">${s.name}</div>
+                    <div class="stock-tag">SISA: ${s.stock}</div>
+                    <div class="counter">
+                        <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${soldOut ? 'disabled' : ''}>-</button>
+                        <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
+                        <button class="btn-qty" onclick="changeQty(${s.id},1)" ${soldOut ? 'disabled' : ''}>+</button>
                     </div>
-                    <img src="${s.img}">
-                    <div class="card-info">
-                        <div class="card-name">${s.name}</div>
-                        <div class="stock-tag">${s.isCS ? 'COMING SOON' : 'SISA: ' + s.stock}</div>
-                        <div class="counter" style="${s.isCS ? 'visibility:hidden' : ''}">
-                            <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${soldOut ? 'disabled' : ''}>-</button>
-                            <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
-                            <button class="btn-qty" onclick="changeQty(${s.id},1)" ${soldOut ? 'disabled' : ''}>+</button>
-                        </div>
-                    </div>
-                </div>`;
-        });
-    }
+                </div>
+            </div>`;
+    });
+}
 
     function changeQty(id, delta) {
         let q = (cart[id] || 0) + delta;
