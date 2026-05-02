@@ -3,55 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERSNACKS.ID - PREMIUM QUALITY</title>
+    <title>TERSNACKS.ID - ARMENIA WINTER EDITION</title>
     <style>
         :root { 
-            --primary: #ff8c00; 
-            --glass: rgba(43, 24, 16, 0.9); 
+            --primary: #d90012; /* Red Armenia */
+            --secondary: #0033a0; /* Blue Armenia */
+            --orange: #f2a800; /* Orange Armenia */
+            --glass: rgba(15, 25, 45, 0.9); 
             --success: #ffd700; 
             --danger: #b22222; 
-            --gold: #ffea00;
+            --snow: #ffffff;
         }
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            margin: 0; background: #1a0f0a; color: white; 
+            margin: 0; background: #0a0f1d; color: white; 
             text-align: center; padding-bottom: 50px; overflow-x: hidden; 
         }
 
-        #rainCanvas {
+        /* CANVAS SALJU */
+        #snowCanvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
         }
 
         header { 
             position: relative; z-index: 10; padding: 45px 10px; 
-            background: var(--glass); border-bottom: 2px solid var(--primary); 
-            box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+            background: var(--glass); border-bottom: 3px solid var(--orange); 
+            box-shadow: 0 5px 25px rgba(0, 51, 160, 0.4);
+            background-image: linear-gradient(to bottom, rgba(217,0,18,0.2), transparent);
         }
         
         .logo-header { 
-            width: 280px; margin-bottom: 10px; 
-            filter: drop-shadow(0 0 10px var(--primary)); 
+            width: 250px; margin-bottom: 10px; 
+            filter: drop-shadow(0 0 15px var(--snow)); 
         }
         
         header p { 
-            margin: 0; font-size: 0.85em; font-weight: 900; 
-            letter-spacing: 2px; color: var(--primary); 
-            background: linear-gradient(90deg, var(--primary), #fff, var(--primary));
-            background-size: 200% auto; -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
+            margin: 0; font-size: 0.9em; font-weight: 900; 
+            letter-spacing: 3px; color: var(--snow); 
+            text-shadow: 0 0 10px var(--secondary);
+            animation: pulse 2s infinite;
         }
 
-        @keyframes shine { to { background-position: 200% center; } }
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; text-shadow: 0 0 20px var(--orange); }
+            100% { opacity: 0.7; }
+        }
 
         .kentang-left, .kentang-right {
-            position: absolute; bottom: 0; width: 130px; z-index: 11;
-            pointer-events: none; filter: drop-shadow(0 0 10px var(--primary));
+            position: absolute; bottom: 0; width: 120px; z-index: 11;
+            pointer-events: none; filter: drop-shadow(0 0 8px var(--snow));
         }
         .kentang-left { left: 10px; }
         .kentang-right { right: 10px; }
 
-        /* PERBAIKAN GRID: Menggunakan Flexbox agar rata tengah jika ganjil */
+        /* GRID FLEXBOX */
         .grid { 
             display: flex;
             flex-wrap: wrap;
@@ -65,12 +72,15 @@
         }
         
         .card { 
-            background: var(--glass); border-radius: 15px; overflow: hidden; 
-            border: 1px solid rgba(255, 140, 0, 0.2); position: relative; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(5px);
+            border-radius: 15px; overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); position: relative; 
             transition: 0.3s;
-            width: calc(23% - 12px); /* Default 4 kolom */
+            width: calc(23% - 12px); 
             min-width: 160px;
         }
+        .card:hover { border-color: var(--orange); transform: translateY(-5px); }
 
         .card img { width: 100%; height: 130px; object-fit: cover; }
         
@@ -88,53 +98,53 @@
 
         .card-info { padding: 10px; }
         .card-name { 
-            font-size: 0.75em; font-weight: 800; color: var(--primary); 
+            font-size: 0.75em; font-weight: 800; color: var(--snow); 
             height: 35px; display: flex; align-items: center; 
             justify-content: center; text-transform: uppercase; 
         }
         
         .stock-tag { 
-            font-size: 0.65em; color: var(--primary); 
-            background: rgba(255, 140, 0, 0.1); border-radius: 5px; 
+            font-size: 0.65em; color: var(--orange); 
+            background: rgba(242, 168, 0, 0.15); border-radius: 5px; 
             padding: 2px 8px; display: inline-block; 
             margin-bottom: 10px; font-weight: 900;
         }
 
         .counter { display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-qty { 
-            background: rgba(255,255,255,0.1); border: 1px solid var(--primary); 
+            background: var(--secondary); border: 1px solid var(--snow); 
             width: 30px; height: 30px; border-radius: 8px; color: white; cursor: pointer; 
         }
         .btn-qty:disabled { opacity: 0.3; cursor: not-allowed; }
 
         #total-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            background: var(--glass); padding: 18px 25px; display: none; 
+            background: var(--secondary); padding: 18px 25px; display: none; 
             justify-content: space-between; align-items: center; 
-            border-top: 2px solid var(--primary); z-index: 1000; 
+            border-top: 3px solid var(--orange); z-index: 1000; 
             backdrop-filter: blur(10px); 
         }
         .btn-order { 
-            background: var(--primary); color: black; border: none; 
+            background: var(--orange); color: black; border: none; 
             padding: 12px 25px; border-radius: 12px; font-weight: 900; cursor: pointer; 
         }
 
         #payment-area { 
             position: relative; z-index: 10; display:none; padding: 40px 20px; 
-            background: rgba(26, 15, 10, 0.98); border-top: 2px solid var(--primary); 
+            background: rgba(10, 15, 29, 0.98); border-top: 2px solid var(--orange); 
         }
         .input-nama { 
             width: 85%; padding: 15px; border-radius: 12px; 
-            border: 1px solid var(--primary); background: transparent; 
+            border: 1px solid var(--orange); background: transparent; 
             color: white; margin-bottom: 25px; text-align: center; font-weight: 800; 
         }
         
         .pay-options { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .opt-btn { 
-            background: transparent; border: 2px solid var(--primary); color: white; 
+            background: transparent; border: 2px solid var(--orange); color: white; 
             padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 900; 
         }
-        .opt-btn.active { background: var(--primary); color: black; }
+        .opt-btn.active { background: var(--orange); color: black; }
 
         .qr-display { display: none; justify-content: center; margin-bottom: 30px; }
         .qr-box { background: white; padding: 12px; border-radius: 15px; width: 200px; }
@@ -142,52 +152,52 @@
         .qr-label { color: black; font-size: 0.8em; font-weight: 900; margin-top: 8px; }
 
         .final-btn { 
-            background: var(--success); color: #000; padding: 18px; 
+            background: var(--orange); color: #000; padding: 18px; 
             border: none; border-radius: 50px; font-weight: 900; 
             width: 90%; cursor: pointer; 
         }
 
         footer { 
             position: relative; z-index: 10; margin-top: 60px; 
-            padding: 50px 20px; border-top: 1px solid rgba(255, 140, 0, 0.2); 
-            background: rgba(43, 24, 16, 0.6); 
+            padding: 50px 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            background: var(--secondary); 
         }
 
         @media (max-width: 600px) { 
             .card { width: calc(48% - 12px); }
-            .kentang-left, .kentang-right { width: 90px; bottom: -15px; } 
+            .kentang-left, .kentang-right { width: 85px; bottom: -10px; } 
         }
     </style>
 </head>
 <body>  
 
-<canvas id="rainCanvas"></canvas>
+<canvas id="snowCanvas"></canvas>
 
 <header>
     <img src="https://i.postimg.cc/T3Dj51gC/download.png" class="logo-header">
-    <h2 style="margin:0; font-size: 1.4em; font-weight: 900;">TERSNACKS.ID</h2>
-    <p>PREMIUM QUALITY • $3.00</p>
+    <h2 style="margin:0; font-size: 1.4em; font-weight: 900; color: var(--snow);">ARMENIA WINTER • TERSNACKS</h2>
+    <p>❄️ SPECIAL ARMENIA EDITION • $3.00 ❄️</p>
     
-    <img src="https://i.postimg.cc/W3ZFPVGM/sui-suii.gif" class="kentang-left" alt="Kiri">
-    <img src="https://i.postimg.cc/m2Cv15wt/16bit-80s.gif" class="kentang-right" alt="Kanan">
+    <img src="https://i.postimg.cc/1RksQjQ9/olympic-olympics.gif" class="kentang-left" alt="Kiri">
+    <img src="https://i.postimg.cc/nLk693gc/haxteluenq-haxtanak.gif" class="kentang-right" alt="Kanan">
 </header>
 
-<div id="loading" style="padding: 50px; color: var(--primary); font-weight: 800;">SYNCING STOCK...</div>
+<div id="loading" style="padding: 50px; color: var(--orange); font-weight: 800;">FROSTING STOCK...</div>
 <div class="grid" id="container-snack"></div>
 
 <div id="total-bar">
     <div style="text-align:left">
-        <div id="summary" style="font-size: 0.65em; color: #ccc;"></div>
-        <div id="display-total" style="font-weight: 900; color: var(--primary); font-size: 1.4em;">$0.00</div>
+        <div id="summary" style="font-size: 0.65em; color: #ddd;"></div>
+        <div id="display-total" style="font-weight: 900; color: var(--snow); font-size: 1.4em;">$0.00</div>
     </div>
-    <button class="btn-order" onclick="openPayment()">ORDER SEKARANG</button>
+    <button class="btn-order" onclick="openPayment()">CHECKOUT NOW</button>
 </div>
 
 <div id="payment-area">
-    <h3 style="color: var(--primary); font-weight: 900;">DATA PEMBELI</h3>
-    <input type="text" id="nama-pembeli" class="input-nama" placeholder="SIAPA NAMA ANDA?">
+    <h3 style="color: var(--orange); font-weight: 900;">WINTER DELIVERY DATA</h3>
+    <input type="text" id="nama-pembeli" class="input-nama" placeholder="ENTER YOUR NAME">
     
-    <p style="font-size: 0.8em; font-weight: 800; margin-bottom: 15px;">PILIH METODE PEMBAYARAN:</p>
+    <p style="font-size: 0.8em; font-weight: 800; margin-bottom: 15px;">PAYMENT METHOD:</p>
     <div class="pay-options">
         <button class="opt-btn" id="btn-riel" onclick="showQR('riel')">RIEL</button>
         <button class="opt-btn" id="btn-usd" onclick="showQR('usd')">USD</button>
@@ -196,56 +206,57 @@
     <div id="qr-riel" class="qr-display">
         <div class="qr-box">
             <img src="https://i.postimg.cc/xC8S9kSY/83ab8373-93bf-4620-9f16-ed523851faa0.jpg">
-            <div class="qr-label">BARCODE RIEL</div>
+            <div class="qr-label">SCAN RIEL</div>
         </div>
     </div>
 
     <div id="qr-usd" class="qr-display">
         <div class="qr-box">
             <img src="https://i.postimg.cc/PJGhKtBT/USD.jpg">
-            <div class="qr-label">BARCODE USD</div>
+            <div class="qr-label">SCAN USD</div>
         </div>
     </div>
 
-    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">KONFIRMASI & KIRIM</button>
+    <button id="submit-btn" onclick="sendToSpreadsheet()" class="final-btn">CONFIRM WINTER ORDER</button>
 </div>
 
 <footer>
-    <h3 style="color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; font-weight: 900; font-size: 1.1em;">THANK YOU FOR SHOPPING!</h3>
-    <div style="color: #fff; font-size: 0.9em; font-weight: 700; opacity: 0.8;">TERIMA KASIH SUDAH BERBELANJA DI TERSNACKS.ID</div>
-    <div style="margin-top: 25px; opacity: 0.3; font-size: 0.6em; letter-spacing: 5px; font-weight: 900;">TERSNACKS.ID • 2026</div>
+    <h3 style="color: var(--orange); letter-spacing: 2px; margin-bottom: 10px; font-weight: 900; font-size: 1.1em;">ENJOY THE COLD, TASTE THE HEAT!</h3>
+    <div style="color: #fff; font-size: 0.9em; font-weight: 700; opacity: 0.8;">TERSNACKS.ID • ARMENIA JOURNEY 2026</div>
+    <div style="margin-top: 25px; opacity: 0.3; font-size: 0.6em; letter-spacing: 5px; font-weight: 900;">WINTER EDITION • 🇦🇲</div>
 </footer>
 
 <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbykBwYZX2poPZx2-7gxtfnlrg0N5BW29lkdYOKeaelaGapyKi3NHQHUYDMoA1XTGTjO/exec";
 
-    // ANIMASI DAUN GUGUR
-    const canvas = document.getElementById('rainCanvas');
+    // ANIMASI SALJU (Ganti dari Daun)
+    const canvas = document.getElementById('snowCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    let leaves = [];
-    const leafColors = ['#d35400', '#e67e22', '#f1c40f', '#c0392b'];
-    for (let i = 0; i < 40; i++) {
-        leaves.push({
+    let flakes = [];
+    for (let i = 0; i < 60; i++) {
+        flakes.push({
             x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-            size: Math.random() * 8 + 5, color: leafColors[Math.floor(Math.random() * leafColors.length)],
-            speed: Math.random() * 2 + 1, swing: Math.random() * 2, swingSpeed: Math.random() * 0.05
+            size: Math.random() * 3 + 1, opacity: Math.random(),
+            speed: Math.random() * 1.5 + 0.5, velX: Math.random() * 0.5 - 0.25
         });
     }
-    function drawLeaves() {
+    function drawSnow() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        leaves.forEach(l => {
-            ctx.fillStyle = l.color; ctx.beginPath();
-            ctx.ellipse(l.x + Math.sin(l.swing) * 20, l.y, l.size, l.size/2, l.swing, 0, Math.PI * 2);
-            ctx.fill(); l.y += l.speed; l.swing += l.swingSpeed;
-            if (l.y > canvas.height) { l.y = -20; l.x = Math.random() * canvas.width; }
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        flakes.forEach(f => {
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+            ctx.fill();
+            f.y += f.speed; f.x += f.velX;
+            if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
         });
-        requestAnimationFrame(drawLeaves);
+        requestAnimationFrame(drawSnow);
     }
-    drawLeaves();
+    drawSnow();
 
-    // DATA PRODUK (TOTAL 17 ITEM)
+    // DATA PRODUK TETAP SAMA
     let snackData = [
         { id: 0, name: "KACANG TOJIN", stock: 0, img: "https://i.postimg.cc/MZbTnf6L/184f7bee-21ba-4477-81c6-c9f7acfb487a.jpg" },
         { id: 1, name: "KETAWA", stock: 0, img: "https://i.postimg.cc/ncFLBVMD/b95988fe-979d-48c6-891c-900e8f3e42f1.jpg" },
@@ -293,7 +304,7 @@
                     <img src="${s.img}">
                     <div class="card-info">
                         <div class="card-name">${s.name}</div>
-                        <div class="stock-tag">SISA: ${s.stock}</div>
+                        <div class="stock-tag">STOCK: ${s.stock}</div>
                         <div class="counter">
                             <button class="btn-qty" onclick="changeQty(${s.id},-1)" ${soldOut ? 'disabled' : ''}>-</button>
                             <span id="qty-${s.id}" style="font-weight:900; min-width:20px;">0</span>
@@ -343,18 +354,18 @@
 
     function sendToSpreadsheet() {
         const nama = document.getElementById('nama-pembeli').value;
-        if(!nama) return alert("NAMA HARUS DIISI!");
+        if(!nama) return alert("NAME IS REQUIRED!");
         let list = []; let total = 0;
         Object.keys(cart).forEach(id => { if(cart[id] > 0) { total += cart[id] * 3; list.push(`${cart[id]}x ${snackData[id].name}`); } });
-        if(list.length === 0) return alert("PILIH SNACK DULU!");
+        if(list.length === 0) return alert("CHOOSE SNACK FIRST!");
         const btn = document.getElementById('submit-btn');
-        btn.innerText = "MENGIRIM..."; btn.disabled = true;
+        btn.innerText = "SENDING TO ARMENIA..."; btn.disabled = true;
         const params = new URLSearchParams();
         params.append('nama', nama);
         params.append('pesanan', list.join(", "));
         params.append('total', "$" + total.toFixed(2));
         fetch(`${scriptURL}?${params.toString()}`, { method: 'GET', mode: 'no-cors' })
-        .then(() => { alert("ORDER SENT!"); location.reload(); })
+        .then(() => { alert("ORDER RECEIVED! STAY WARM!"); location.reload(); })
         .catch(() => { location.reload(); });
     }
     init();
